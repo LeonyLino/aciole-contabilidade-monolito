@@ -1,0 +1,68 @@
+<!--<head th:replace="~{base :: head}"></head>-->
+
+<!--<div th:replace="~{base :: logo}"/>-->
+<div class="container" th:fragment="formCadCliente">
+	<!--<div th:replace="~{base :: titulo('Cadastrar Novo Cliente')}"/>-->
+
+	<div class="card mt-3">
+		<div class="alert alert-dark" role="alert" th:if="${errorMessage}">
+			<div th:text="${errorMessage}" />
+		</div>
+		<form th:object="${clienteDTO}" class="card-body" action="/cliente/novo" method="POST">
+			<div class="form-group">
+				<label for="nomeCliente">Nome</label>
+				<input th:field="*{nomeCliente}" th:errorClass="is-invalid" class="form-control" />
+				<div class="invalid-feedback" th:errors="*{nomeCliente}">
+					Erros do nome do produto
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="cpfCliente">CPF</label>
+				<input th:field="*{cpfCliente}" th:errorClass="is-invalid" class="form-control" />
+				<div class="invalid-feedback" th:errors="*{cpfCliente}">
+					Erros da url do produto
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="rgCliente">RG</label>
+				<input th:field="*{rgCliente}" th:errorClass="is-invalid" class="form-control" />
+				<div class="invalid-feedback" th:errors="*{rgCliente}">
+					Erros da url da imagem
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="tituloEleitorCliente">Título de Eleitor</label>
+				<input th:field="*{tituloEleitorCliente}" th:errorClass="is-invalid" class="form-control" />
+				<div class="invalid-feedback" th:errors="*{tituloEleitorCliente}">
+					Erros da url da imagem
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="numContato">Nº Contato</label>
+				<input th:field="*{numContato}" th:errorClass="is-invalid" class="form-control" />
+				<div class="invalid-feedback" th:errors="*{numContato}">
+					Erros da url da imagem
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="email">E-mail</label>
+				<input th:field="*{email}" th:errorClass="is-invalid" class="form-control" />
+				<div class="invalid-feedback" th:errors="*{email}">
+					Erros da url da imagem
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="dtNascimento">Data Nascimento</label>
+				<input th:field="*{dtNascimento}" th:errorClass="is-invalid" class="form-control" />
+				<div class="invalid-feedback" th:errors="*{dtNascimento}">
+					Erros da url da imagem
+				</div>
+			</div>
+
+			<button class="btn btn-primary" type="submit">Cadastrar</button>
+		</form>
+	</div>
+</div>
