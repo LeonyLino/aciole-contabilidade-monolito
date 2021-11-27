@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -22,34 +23,35 @@ import lombok.Setter;
 @Table(name = "TB_CLIENTE")
 @AllArgsConstructor
 @NoArgsConstructor
+@SequenceGenerator(name = "TB_CLIENTE_ID_CLIENTE_SEQ", sequenceName = "TB_CLIENTE_ID_CLIENTE_SEQ", initialValue = 1, allocationSize = 1)
 public class Cliente implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "ID", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "TB_CLIENTE_ID_CLIENTE_SEQ")
+	@Column(name = "ID_CLIENTE", nullable = false)
 	private Long id;
 	
-	@Column(name = "nome_cliente", nullable = false, length = 100)
+	@Column(name = "NOME_CLIENTE", nullable = false, length = 100)
 	private String nome;
 
-	@Column(name = "cpf_cliente", nullable = false, length = 11, unique = true)
+	@Column(name = "CPF_CLIENTE", nullable = false, length = 11, unique = true)
 	private String cpf;
 	
-	@Column(name = "rg_cliente", nullable = false, length = 15, unique = true)
+	@Column(name = "RG_CLIENTE", nullable = false, length = 15, unique = true)
 	private String rg;
 	
-	@Column(name = "titulo_eleitor_cliente", nullable = false, length = 12, unique = true)
+	@Column(name = "TITULO_ELEITOR_CLIENTE", nullable = false, length = 12, unique = true)
 	private String tituloEleitor;
 	
-	@Column(name = "num_contato_cliente", nullable = true, length = 11)
+	@Column(name = "NUM_CONTATO_CLIENTE", nullable = true, length = 11)
 	private String numContato;
 
-	@Column(name = "email_cliente", nullable = true, length = 100, unique = true)
+	@Column(name = "EMAIL_CLIENTE", nullable = true, length = 100, unique = true)
 	private String email;
 	
-	@Column(name = "dt_nascimento_cliente", nullable = false)
+	@Column(name = "DT_NASCIMENTO_CLIENTE", nullable = false)
 //	@Convert(converter = LocalDateConverter.class)
 	private LocalDate dtNascimento;
 	

@@ -1,5 +1,7 @@
 package br.com.aciolecontabilidade.controllers;
 
+import java.security.Principal;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.aciolecontabilidade.exceptions.ClienteEncontradoException;
 import br.com.aciolecontabilidade.models.dto.ClienteDTO;
@@ -28,21 +31,30 @@ public class ClienteController {
 		return "cliente/form";
 	}
 
-	@GetMapping
-	@RequestMapping("/menu/{itemMenu}")
-	public String menuPage(@PathVariable("itemMenu") String itemMenu, Model model, ClienteDTO clienteDTO,
-			BindingResult result) {
-		model.addAttribute("itemMenu", itemMenu);
-		
-		return "sliderbar";
+	@GetMapping("/menu/{itemMenu}")
+	public ModelAndView menuPage(@PathVariable("itemMenu") String itemMenu, ClienteDTO clienteDTO, BindingResult resul,
+			Principal principal) {
+
+		ModelAndView mv = new ModelAndView("cliente/".concat(itemMenu));
+		mv.addObject("itemMenu", itemMenu);
+		mv.addObject("nomeUser", principal.getName());
+
+		return mv;
 	}
 
-	@PostMapping("novo")
-	public String salvar(@Valid ClienteDTO clienteDTO, BindingResult result, Model model) {
+//	@GetMapping("/menu")
+//	public ModelAndView ModelAndView(Principal principal, ClienteDTO clienteDTO) {
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("nomeUser", principal.getName());
+//		return mv;
+//	}
 
+	@PostMapping("novo")
+	public ModelAndView salvar(@Valid ClienteDTO clienteDTO, BindingResult result, Model model) {
+		ModelAndView mv = new ModelAndView();
 		try {
 			if (result.hasErrors()) {
-				return "cliente/form";
+				return this.menuPage("cadCliente", null, result, null);
 			}
 
 			cService.cadastrar(clienteDTO);
@@ -50,7 +62,7 @@ public class ClienteController {
 			model.addAttribute("errorMessage", e.getMessage());
 		}
 
-		return "cliente/form";
+		return mv;
 	}
 
 }
