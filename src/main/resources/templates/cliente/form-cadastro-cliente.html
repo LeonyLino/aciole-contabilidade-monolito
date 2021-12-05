@@ -8,7 +8,7 @@
 			<div class="alert alert-dark" role="alert" th:if="${errorMessage}">
 				<div th:text="${errorMessage}" />
 			</div>
-			<form th:object="${clienteDTO}" class="card-body" action="/cliente/novo" method="POST">
+			<form th:object="${clienteDTO}" class="card-body" action="/cliente" method="POST">
 				<div class="form-group">
 					<label for="nomeCliente">Nome</label>
 					<input th:field="*{nomeCliente}" th:errorClass="is-invalid" class="form-control" />
