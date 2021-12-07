@@ -20,21 +20,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().anyRequest().authenticated().and()
-				.formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/cliente/home", true).permitAll()).csrf()
+				.formLogin(form -> form.loginPage("/user/login").defaultSuccessUrl("/cliente/home", true).permitAll()).csrf()
 				.disable();
 	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
-		/*
-		 * UserDetails user =
-		 * User.builder().username("leonny").password(encoder.encode("leonny")).roles(
-		 * "ADM").build();
-		 */
-
-		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(encoder)/* .withUser(user) */;
+		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(encoder);
 
 	}
 

@@ -29,6 +29,8 @@ public class ClienteServiceImpl implements ClienteService {
 	public ClienteDTO cadastrar(ClienteDTO dto) throws ClienteEncontradoException {
 
 		dto.setCpfCliente(StringUtil.removerMascara(dto.getCpfCliente()));
+		dto.setNumContato(StringUtil.removerMascara(dto.getNumContato()));
+		
 		this.verificaExistenciaCliente(dto);
 		cRepository.save(new Cliente(null, dto.getNomeCliente(), dto.getCpfCliente(), dto.getRgCliente(),
 				dto.getTituloEleitorCliente(), dto.getNumContato(), dto.getEmail(), dto.getDtNascimento(),

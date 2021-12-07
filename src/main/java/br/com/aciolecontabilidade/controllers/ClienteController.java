@@ -37,7 +37,7 @@ public class ClienteController {
 	public ModelAndView cadastrar(ClienteDTO clienteDTO, BindingResult resul, Principal principal) {
 
 		ModelAndView mv = new ModelAndView("cliente/form-cadastro-cliente");
-		mv.addObject("itemMenu", "form-cadastro-cliente");
+		mv.addObject("itemMenu", "cliente");
 		mv.addObject("nomeUser", principal.getName());
 
 		return mv;
@@ -45,7 +45,7 @@ public class ClienteController {
 
 	@PostMapping
 	public ModelAndView salvar(@Valid ClienteDTO clienteDTO, BindingResult result, Model model, Principal principal) {
-		ModelAndView mv = new ModelAndView("redirect:/cliente/form");
+		ModelAndView mv = new ModelAndView("redirect:/cliente/listar");
 		try {
 			if (result.hasErrors()) {
 				return this.cadastrar(clienteDTO, result, principal);
@@ -63,7 +63,7 @@ public class ClienteController {
 	@GetMapping("/listar")
 	public ModelAndView listar(Principal principal, ClienteDTO dto) {
 		ModelAndView mv = new ModelAndView("cliente/listar");
-		mv.addObject("itemMenu", "form-cadastro-cliente");
+		mv.addObject("itemMenu", "cliente");
 		mv.addObject("nomeUser", principal.getName());
 		mv.addObject("clientes", cService.listar());
 		return mv;

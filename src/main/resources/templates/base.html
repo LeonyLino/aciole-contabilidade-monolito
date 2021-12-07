@@ -153,17 +153,17 @@
 					</a>
 				</li>
 				<li>
-					<a th:href="@{/cliente/form}" th:classappend="${itemMenu} == form-cadastro-cliente ? 'active'"
+					<a th:href="@{/cliente/listar}" th:classappend="${itemMenu} == cliente ? 'active'"
 						class="nav-link text-white">
 						<svg class="bi me-2" width="20" height="20">
 							<use xlink:href="#people-circle" />
 						</svg>
-						Cadastrar Cliente
+						Cliente
 					</a>
 				</li>
 
 				<li>
-					<a th:href="@{/cliente/menu/newUser}" th:classappend="${itemMenu} == newUser ? 'active'"
+					<a th:href="@{/user/cadastrar}" th:classappend="${itemMenu} == novoUser ? 'active'"
 						class="nav-link text-white">
 						<svg class="bi me-2" width="20" height="20">
 							<use xlink:href="#x-circle" />
@@ -197,7 +197,7 @@
 		<div class="b-example-divider"></div>
 
 
-		<div class="container">
+		<div class="container" style="position: relative; overflow: auto; height: 600px;">
 			<div th:include="${page}" />
 		</div>
 
@@ -222,19 +222,6 @@
 
 
 <!--verificar se vai ser necessario usar-->
-
-<div th:fragment="logo" class="logo-container p-3 d-flex justify-content-between">
-	<div class="container-fluid">
-
-	</div>
-
-	<!--<span class="mt-3 mr-2">
-		<a class="text-light" sec:authorize="!isAuthenticated()" href="/login">login</a>
-		<a onclick="document.querySelector('#form-login').submit()" class="text-light" sec:authorize="isAuthenticated()"
-			href="#">logout</a>
-		<form id="form-login" th:action="@{/logout}" method="post"></form>
-	</span>-->
-</div>
 
 <div th:fragment="titulo(valor)" class="jumbotron mb-0">
 	<h1 class="display-4" th:text="${valor}"></h1>
