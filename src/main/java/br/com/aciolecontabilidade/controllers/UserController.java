@@ -33,9 +33,11 @@ public class UserController {
 		return mv;
 	}
 
-	@PostMapping
+	@PostMapping("salvar")
 	public ModelAndView salvar(UserDTO dto, BindingResult resul, Principal principal) {
-		ModelAndView mv = new ModelAndView("");
+		ModelAndView mv = new ModelAndView("user/cadastrar");
+		uService.salvar(dto);
+		mv.addObject("errorMessage", "Usuário cadastrado com sucesso!");
 
 		return mv;
 	}

@@ -4,7 +4,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.aciolecontabilidade.models.Authorities;
-import br.com.aciolecontabilidade.models.Users;
+import br.com.aciolecontabilidade.models.User;
 import br.com.aciolecontabilidade.models.dto.UserDTO;
 import br.com.aciolecontabilidade.repository.AuthoritiesRepository;
 import br.com.aciolecontabilidade.repository.UserRepository;
@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 	public void salvar(UserDTO dto) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-		uRepository.save(new Users(dto.getUsuario(), encoder.encode(dto.getSenha()), true));
+		uRepository.save(new User(dto.getUsuario(), encoder.encode(dto.getSenha()), true));
 		aRepository.save(new Authorities(dto.getUsuario(), "ADM"));
 		
 	}

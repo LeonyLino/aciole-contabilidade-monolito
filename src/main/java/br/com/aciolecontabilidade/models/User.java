@@ -3,6 +3,7 @@ package br.com.aciolecontabilidade.models;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,10 +14,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
 @Table(name = "USERS")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Users implements Serializable {
+public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	

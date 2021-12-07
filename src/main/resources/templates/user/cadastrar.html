@@ -4,9 +4,12 @@
 <body>
 	<div class="container">
 		<div th:replace="~{base :: titulo('Novo Usuario')}"></div>
+		<div class="alert alert-dark" role="alert" th:if="${errorMessage}">
+			<div th:text="${errorMessage}" />
+		</div>
 
 		<div class="card mb-3">
-			<form th:object="${userDTO}" th:action="@{user}" class="card-body" method="post">
+			<form th:object="${userDTO}" th:action="@{salvar}" class="card-body" method="post">
 				<div class="form-group">
 					<label for="usuario">Usuário</label>
 					<input th:field="*{usuario}" class="form-control" placeholder="usuário" />
