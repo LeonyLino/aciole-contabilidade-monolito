@@ -15,24 +15,24 @@
 		<table class="table table-dark table-striped">
 			<thead>
 				<tr>
-					<th scope="col">Nome</th>
-					<th scope="col">CPF</th>
-					<th scope="col">RG</th>
-					<th scope="col">Titulo Eleitor</th>
-					<th scope="col">Telefone</th>
-					<th scope="col">E-mail</th>
-					<th scope="col">Data Nascimento</th>
+					<th>Nome</th>
+					<th>CPF</th>
+					<th>RG</th>
+					<th>Titulo Eleitor</th>
+					<th>Telefone</th>
+					<th>E-mail</th>
+					<th>Data Nascimento</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="cliente : ${clientes}">
-					<th scope="row" th:text="${cliente.nomeCliente}"></th>
-					<th scope="row" th:text="${cliente.cpfCliente}"></th>
-					<th scope="row" th:text="${cliente.rgCliente}"></th>
-					<th scope="row" th:text="${cliente.tituloEleitorCliente}"></th>
-					<th scope="row" th:text="${cliente.numContato}"></th>
-					<th scope="row" th:text="${cliente.email}"></th>
-					<th scope="row" th:text="${#temporals.format(cliente.dtNascimento, 'dd/MM/yyyy')}"></th>
+					<th th:text="${cliente.nomeCliente}"></th>
+					<th th:text="${cliente.cpfCliente}"></th>
+					<th th:text="${cliente.rgCliente}"></th>
+					<th th:text="${cliente.tituloEleitorCliente}"></th>
+					<th th:text="${cliente.numContato}"></th>
+					<th th:text="${cliente.email}"></th>
+					<th th:text="${#temporals.format(cliente.dtNascimento, 'dd/MM/yyyy')}"></th>
 				</tr>
 
 			</tbody>

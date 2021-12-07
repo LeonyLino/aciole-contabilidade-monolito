@@ -161,26 +161,20 @@
 						Cliente
 					</a>
 				</li>
-
-				<li>
-					<a th:href="@{/user/cadastrar}" th:classappend="${itemMenu} == novoUser ? 'active'"
-						class="nav-link text-white">
-						<svg class="bi me-2" width="20" height="20">
-							<use xlink:href="#x-circle" />
-						</svg>
-						Novo Usuário
-					</a>
-				</li>
 			</ul>
 			<hr>
 			<div class="dropdown">
 				<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-					id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-					<img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+					id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+					<!--<img src="https://www.facebook.com/photo/?fbid=2379572435472924&set=a.103129833117207" alt=""
+						width="32" height="32" class="rounded-circle me-2">-->
+					<svg class="bi me-2" width="20" height="20">
+						<use xlink:href="#people-circle" />
+					</svg>
 					<strong><span th:text="${nomeUser}"></span></strong>
 				</a>
 				<ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-					<li><a class="dropdown-item" href="#">New project...</a></li>
+					<li><a class="dropdown-item" th:href="@{/user/cadastrar}">Novo Usuário</a></li>
 					<li><a class="dropdown-item" href="#">Settings</a></li>
 					<li><a class="dropdown-item" href="#">Profile</a></li>
 					<li>
