@@ -26,17 +26,16 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	@Transactional
-	public ClienteDTO cadastrar(ClienteDTO dto) throws ClienteEncontradoException {
+	public void cadastrar(ClienteDTO dto) throws ClienteEncontradoException {
 
 		dto.setCpfCliente(StringUtil.removerMascara(dto.getCpfCliente()));
 		dto.setNumContato(StringUtil.removerMascara(dto.getNumContato()));
-		
+
 		this.verificaExistenciaCliente(dto);
 		cRepository.save(new Cliente(null, dto.getNomeCliente(), dto.getCpfCliente(), dto.getRgCliente(),
 				dto.getTituloEleitorCliente(), dto.getNumContato(), dto.getEmail(), dto.getDtNascimento(),
 				BigDecimal.ZERO));
 
-		return null;
 	}
 
 	private void verificaExistenciaCliente(ClienteDTO dto) throws ClienteEncontradoException {
@@ -61,6 +60,8 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public List<ClienteDTOOut> listar() {
+//		Sort sort = Sort.by("nome");
+//		PageRequest paginacao = PageRequest.of(0, 10, sort);
 		return cRepository.findAll().stream().map(cDTOConverter::convert).collect(Collectors.toList());
 
 	}

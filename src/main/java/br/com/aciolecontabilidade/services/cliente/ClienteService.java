@@ -8,7 +8,7 @@ import br.com.aciolecontabilidade.models.dto.ClienteDTOOut;
 
 public interface ClienteService {
 
-	ClienteDTO cadastrar(ClienteDTO dto) throws ClienteEncontradoException;
+	void cadastrar(ClienteDTO dto) throws ClienteEncontradoException;
 
 	List<ClienteDTOOut> listar();
 
