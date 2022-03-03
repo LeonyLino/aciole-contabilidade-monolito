@@ -1,0 +1,28 @@
+<html th:replace="~{base :: template (~{:: div})}">
+
+
+<body>
+	<div class="container">
+		<div th:replace="~{base :: titulo('Novo Usuario')}"></div>
+		<div class="alert alert-dark" role="alert" th:if="${errorMessage}">
+			<div th:text="${errorMessage}" />
+		</div>
+
+		<div class="card mb-3">
+			<form th:object="${userDTO}" th:action="@{salvar}" class="card-body" method="post">
+				<div class="form-group">
+					<label for="usuario">Usuário</label>
+					<input th:field="*{usuario}" class="form-control" placeholder="usuário" />
+				</div>
+				<div class="form-group">
+					<label for="senha">Senha</label>
+					<input type="password" th:field="*{senha}" class="form-control" placeholder="senha" />
+				</div>
+
+				<button class="btn btn-primary mt-3" type="submit">Cadastrar</button>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -4,8 +4,6 @@
 <head th:replace="~{base :: head}"></head>
 
 <body>
-	<div th:replace="~{base :: logo}" />
-
 	<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
 		<symbol id="bootstrap" viewBox="0 0 118 94">
 			<title>Bootstrap</title>
@@ -106,7 +104,7 @@
 			<hr>
 			<ul class="nav nav-pills flex-column mb-auto">
 				<li class="nav-item">
-					<a th:href="@{/menu/home}" th:classappend="${itemMenu} == home ? 'active'"
+					<a th:href="@{/cliente/menu/home}" th:classappend="${itemMenu} == home ? 'active'"
 						class="nav-link text-white" aria-current="page">
 						<svg class="bi me-2" width="20" height="20">
 							<use xlink:href="#home" />
@@ -115,7 +113,7 @@
 					</a>
 				</li>
 				<li>
-					<a th:href="@{/menu/cadCliente}" th:classappend="${itemMenu} == cadCliente ? 'active'"
+					<a th:href="@{/cliente/menu/cadCliente}" th:classappend="${itemMenu} == cadCliente ? 'active'"
 						class="nav-link text-white">
 						<svg class="bi me-2" width="20" height="20">
 							<use xlink:href="#people-circle" />
@@ -125,7 +123,7 @@
 				</li>
 
 				<li>
-					<a th:href="@{/menu/newUser}" th:classappend="${itemMenu} == newUser ? 'active'"
+					<a th:href="@{/cliente/menu/newUser}" th:classappend="${itemMenu} == newUser ? 'active'"
 						class="nav-link text-white">
 						<svg class="bi me-2" width="20" height="20">
 							<use xlink:href="#x-circle" />
@@ -139,7 +137,7 @@
 				<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
 					id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 					<img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-					<strong>mdo</strong>
+					<strong><span th:text="${nomeUser}"></span></strong>
 				</a>
 				<ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
 					<li><a class="dropdown-item" href="#">New project...</a></li>
@@ -148,22 +146,27 @@
 					<li>
 						<hr class="dropdown-divider">
 					</li>
-					<li><a class="dropdown-item" href="#">Sign out</a></li>
+					<li><a onclick="document.querySelector('#form-login').submit()" class="dropdown-item"
+							sec:authorize="isAuthenticated()" href="#">logout</a>
+						<form id="form-login" th:action="@{/logout}" method="post"></form>
+					</li>
 				</ul>
 			</div>
 		</div>
 
 		<div class="b-example-divider"></div>
 
-		<div th:each="item : ${itemMenu}">
-			<div th:case="'cadCliente'" th:replace="~{cliente/form :: formCadCliente}" />
+
+		<div class="container" th:switch="${itemMenu}">
+			<div th:case="'cadCliente'" th:include="~{cliente/form :: cadastro-cliente}" />
+			<div th:case="'home'"></div>
 		</div>
 
 	</main>
 
 
 
-	<script th:src="@{/js/sidebars.js}"></script>
+	<!--<script th:src="@{/js/sidebars.js}"></script>-->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>

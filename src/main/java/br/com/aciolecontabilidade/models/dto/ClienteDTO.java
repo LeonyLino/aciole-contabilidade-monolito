@@ -20,12 +20,9 @@ public class ClienteDTO {
 
 	private Long id;
 	@NotNull
-	@NotEmpty
 	@Size(min = 3, max = 100)
 	private String nomeCliente;
 	@NotNull
-	@NotEmpty
-	@Size(min = 11, max = 14)
 	@CPF
 	private String cpfCliente;
 	@NotNull
@@ -38,7 +35,7 @@ public class ClienteDTO {
 	private String tituloEleitorCliente;
 	@NotNull
 	@NotEmpty
-	@Size(min = 3, max = 11)
+	@Size(max = 16)
 	private String numContato;
 	@NotNull
 	@NotEmpty

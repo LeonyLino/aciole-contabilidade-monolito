@@ -1,14 +1,16 @@
 package br.com.aciolecontabilidade.controllers;
 
+import java.security.Principal;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.aciolecontabilidade.exceptions.ClienteEncontradoException;
 import br.com.aciolecontabilidade.models.dto.ClienteDTO;
@@ -22,35 +24,49 @@ public class ClienteController {
 
 	private final ClienteService cService;
 
-	@GetMapping("form")
-	public String index(ClienteDTO clienteDTO) {
+	@GetMapping("/home")
+	public ModelAndView index(Principal principal) {
+		ModelAndView mv = new ModelAndView("cliente/home");
+		mv.addObject("itemMenu", "home");
+		mv.addObject("nomeUser", principal.getName());
 
-		return "cliente/form";
+		return mv;
 	}
 
-	@GetMapping
-	@RequestMapping("/menu/{itemMenu}")
-	public String menuPage(@PathVariable("itemMenu") String itemMenu, Model model, ClienteDTO clienteDTO,
-			BindingResult result) {
-		model.addAttribute("itemMenu", itemMenu);
-		
-		return "sliderbar";
+	@GetMapping("/form")
+	public ModelAndView cadastrar(ClienteDTO clienteDTO, BindingResult resul, Principal principal) {
+
+		ModelAndView mv = new ModelAndView("cliente/form-cadastro-cliente");
+		mv.addObject("itemMenu", "cliente");
+		mv.addObject("nomeUser", principal.getName());
+
+		return mv;
 	}
 
-	@PostMapping("novo")
-	public String salvar(@Valid ClienteDTO clienteDTO, BindingResult result, Model model) {
-
+	@PostMapping
+	public ModelAndView salvar(@Valid ClienteDTO clienteDTO, BindingResult result, Model model, Principal principal) {
+		ModelAndView mv = new ModelAndView("redirect:/cliente/listar");
 		try {
 			if (result.hasErrors()) {
-				return "cliente/form";
+				return this.cadastrar(clienteDTO, result, principal);
 			}
 
 			cService.cadastrar(clienteDTO);
 		} catch (ClienteEncontradoException e) {
-			model.addAttribute("errorMessage", e.getMessage());
+			mv.setViewName("cliente/form-cadastro-cliente");
+			mv.addObject("errorMessage", e.getMessage());
 		}
 
-		return "cliente/form";
+		return mv;
+	}
+
+	@GetMapping("/listar")
+	public ModelAndView listar(Principal principal, ClienteDTO dto) {
+		ModelAndView mv = new ModelAndView("cliente/listar");
+		mv.addObject("itemMenu", "cliente");
+		mv.addObject("nomeUser", principal.getName());
+		mv.addObject("clientes", cService.listar());
+		return mv;
 	}
 
 }

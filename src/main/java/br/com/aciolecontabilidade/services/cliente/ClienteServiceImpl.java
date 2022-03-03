@@ -1,6 +1,8 @@
 package br.com.aciolecontabilidade.services.cliente;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -9,7 +11,10 @@ import org.springframework.stereotype.Service;
 import br.com.aciolecontabilidade.exceptions.ClienteEncontradoException;
 import br.com.aciolecontabilidade.models.Cliente;
 import br.com.aciolecontabilidade.models.dto.ClienteDTO;
+import br.com.aciolecontabilidade.models.dto.ClienteDTOOut;
+import br.com.aciolecontabilidade.models.dto.converter.ClienteDTOConverter;
 import br.com.aciolecontabilidade.repository.ClienteRepository;
+import br.com.aciolecontabilidade.utils.StringUtil;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -17,17 +22,20 @@ import lombok.RequiredArgsConstructor;
 public class ClienteServiceImpl implements ClienteService {
 
 	private final ClienteRepository cRepository;
+	private final ClienteDTOConverter cDTOConverter;
 
 	@Override
 	@Transactional
-	public ClienteDTO cadastrar(ClienteDTO dto) throws ClienteEncontradoException {
+	public void cadastrar(ClienteDTO dto) throws ClienteEncontradoException {
+
+		dto.setCpfCliente(StringUtil.removerMascara(dto.getCpfCliente()));
+		dto.setNumContato(StringUtil.removerMascara(dto.getNumContato()));
 
 		this.verificaExistenciaCliente(dto);
 		cRepository.save(new Cliente(null, dto.getNomeCliente(), dto.getCpfCliente(), dto.getRgCliente(),
 				dto.getTituloEleitorCliente(), dto.getNumContato(), dto.getEmail(), dto.getDtNascimento(),
 				BigDecimal.ZERO));
 
-		return null;
 	}
 
 	private void verificaExistenciaCliente(ClienteDTO dto) throws ClienteEncontradoException {
@@ -47,6 +55,14 @@ public class ClienteServiceImpl implements ClienteService {
 		if (cRepository.existsByEmail(dto.getEmail())) {
 			throw new ClienteEncontradoException("E-mail: " + dto.getEmail());
 		}
+
+	}
+
+	@Override
+	public List<ClienteDTOOut> listar() {
+//		Sort sort = Sort.by("nome");
+//		PageRequest paginacao = PageRequest.of(0, 10, sort);
+		return cRepository.findAll().stream().map(cDTOConverter::convert).collect(Collectors.toList());
 
 	}
 

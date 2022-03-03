@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  springboot:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: springboot
+    networks:
+      - aciole-compose-network
+    ports:
+      - "9090:9090"
+    volumes:
+      - "./springboot:/home/data"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/db_aciole_contabilidade
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      
+  postgres:
+    image: postgres
+    restart: always
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=db_aciole_contabilidade
+    networks:
+      - aciole-compose-network
+      
+  phppgadmin:
+    container_name: phppgadmin
+    image: dpage/pgadmin4
+    ports:
+      - "16543:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=leonny.lino@hotmail.com
+      - PGADMIN_DEFAULT_PASSWORD=root123
+#      - POSTGRES_HOST=postgres
+#      - POSTGRES_PORT=5432
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_PASS=postgres
+    networks:
+      - aciole-compose-network
+    depends_on:
+      - postgres
+   
+  
+networks: 
+    aciole-compose-network:
+      driver: bridge
