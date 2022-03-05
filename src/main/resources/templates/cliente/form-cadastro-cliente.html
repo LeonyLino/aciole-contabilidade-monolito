@@ -13,13 +13,23 @@
 					<label for="nomeCliente">Nome</label>
 					<input th:field="*{nomeCliente}" th:errorClass="is-invalid" class="form-control" />
 					<div class="invalid-feedback" th:errors="*{nomeCliente}">
-						Erros do nome do produto
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="nomeFantasia">Nome Fantasia</label>
+					<input th:field="*{nomeFantasia}" th:errorClass="is-invalid" class="form-control" />
+					<div class="invalid-feedback" th:errors="*{nomeFantasia}">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="cpfCliente">CPF</label>
 					<input th:field="*{cpfCliente}" th:errorClass="is-invalid" class="form-control" />
 					<div class="invalid-feedback" th:errors="*{cpfCliente}"></div>
+				</div>
+				<div class="form-group">
+					<label for="cnpj">CNPJ</label>
+					<input th:field="*{cnpj}" th:errorClass="is-invalid" class="form-control" />
+					<div class="invalid-feedback" th:errors="*{cnpj}"></div>
 				</div>
 				<div class="form-group">
 					<label for="rgCliente">RG</label>
@@ -48,6 +58,13 @@
 					<label for="dtNascimento">Data Nascimento</label>
 					<input th:field="*{dtNascimento}" th:errorClass="is-invalid" class="form-control" />
 					<div class="invalid-feedback" th:errors="*{dtNascimento}">
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="senhaGov">Senha Gov</label>
+					<input th:field="*{senhaGov}" th:errorClass="is-invalid" class="form-control" />
+					<div class="invalid-feedback" th:errors="*{senhaGov}">
 					</div>
 				</div>
 

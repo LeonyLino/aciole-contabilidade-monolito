@@ -1,6 +1,5 @@
 package br.com.aciolecontabilidade.services.cliente;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import br.com.aciolecontabilidade.enums.FlagAtivoEnum;
 import br.com.aciolecontabilidade.exceptions.ClienteEncontradoException;
 import br.com.aciolecontabilidade.models.Cliente;
 import br.com.aciolecontabilidade.models.dto.ClienteDTO;
@@ -32,9 +32,9 @@ public class ClienteServiceImpl implements ClienteService {
 		dto.setNumContato(StringUtil.removerMascara(dto.getNumContato()));
 
 		this.verificaExistenciaCliente(dto);
-		cRepository.save(new Cliente(null, dto.getNomeCliente(), dto.getCpfCliente(), dto.getRgCliente(),
-				dto.getTituloEleitorCliente(), dto.getNumContato(), dto.getEmail(), dto.getDtNascimento(),
-				BigDecimal.ZERO));
+		cRepository.save(new Cliente(dto.getNomeCliente(), dto.getNomeFantasia(), dto.getCpfCliente(),
+				dto.getCnpj(), dto.getRgCliente(), dto.getTituloEleitorCliente(), dto.getNumContato(), dto.getEmail(),
+				dto.getDtNascimento(), dto.getSenhaGov(), FlagAtivoEnum.SIM.getChave()));
 
 	}
 
