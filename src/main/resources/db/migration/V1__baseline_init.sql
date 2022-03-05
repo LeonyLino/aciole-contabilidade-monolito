@@ -3,7 +3,7 @@ CREATE TABLE tb_cliente (
 	nome_cliente VARCHAR(100) NOT NULL,
 	nome_fantasia_cliente VARCHAR(200),
 	cpf_cliente VARCHAR(11) NOT NULL UNIQUE,
-	cnpj_cliente VARCHAR(14) NOT NULL UNIQUE,
+	cnpj_cliente VARCHAR(14) UNIQUE,
 	rg_cliente	VARCHAR(15) NOT NULL UNIQUE,
 	titulo_eleitor_cliente  VARCHAR(12) NOT NULL UNIQUE,
 	num_contato_cliente VARCHAR(11),

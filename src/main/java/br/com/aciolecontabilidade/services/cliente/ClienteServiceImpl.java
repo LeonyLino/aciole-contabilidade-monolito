@@ -30,10 +30,11 @@ public class ClienteServiceImpl implements ClienteService {
 
 		dto.setCpfCliente(StringUtil.removerMascara(dto.getCpfCliente()));
 		dto.setNumContato(StringUtil.removerMascara(dto.getNumContato()));
+		dto.setCnpj(!dto.getCnpj().isEmpty() ? StringUtil.removerMascara(dto.getCnpj()) : null);
 
 		this.verificaExistenciaCliente(dto);
-		cRepository.save(new Cliente(dto.getNomeCliente(), dto.getNomeFantasia(), dto.getCpfCliente(),
-				dto.getCnpj(), dto.getRgCliente(), dto.getTituloEleitorCliente(), dto.getNumContato(), dto.getEmail(),
+		cRepository.save(new Cliente(dto.getNomeCliente(), dto.getNomeFantasia(), dto.getCpfCliente(), dto.getCnpj(),
+				dto.getRgCliente(), dto.getTituloEleitorCliente(), dto.getNumContato(), dto.getEmail(),
 				dto.getDtNascimento(), dto.getSenhaGov(), FlagAtivoEnum.SIM.getChave()));
 
 	}
@@ -54,6 +55,10 @@ public class ClienteServiceImpl implements ClienteService {
 
 		if (cRepository.existsByEmail(dto.getEmail())) {
 			throw new ClienteEncontradoException("E-mail: " + dto.getEmail());
+		}
+
+		if (cRepository.existsByCnpj(dto.getCnpj())) {
+			throw new ClienteEncontradoException("CNPJ: " + dto.getCnpj());
 		}
 
 	}

@@ -11,13 +11,13 @@
 			<form th:object="${clienteDTO}" class="card-body" action="/cliente" method="POST">
 				<div class="form-group">
 					<label for="nomeCliente">Nome</label>
-					<input th:field="*{nomeCliente}" th:errorClass="is-invalid" class="form-control" />
+					<input th:field="*{nomeCliente}" th:errorClass="is-invalid" class="form-control" maxlength="100" />
 					<div class="invalid-feedback" th:errors="*{nomeCliente}">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="nomeFantasia">Nome Fantasia</label>
-					<input th:field="*{nomeFantasia}" th:errorClass="is-invalid" class="form-control" />
+					<input th:field="*{nomeFantasia}" th:errorClass="is-invalid" class="form-control" maxlength="200" />
 					<div class="invalid-feedback" th:errors="*{nomeFantasia}">
 					</div>
 				</div>
@@ -60,10 +60,10 @@
 					<div class="invalid-feedback" th:errors="*{dtNascimento}">
 					</div>
 				</div>
-				
+
 				<div class="form-group">
 					<label for="senhaGov">Senha Gov</label>
-					<input th:field="*{senhaGov}" th:errorClass="is-invalid" class="form-control" />
+					<input th:field="*{senhaGov}" th:errorClass="is-invalid" class="form-control" maxlength="50" />
 					<div class="invalid-feedback" th:errors="*{senhaGov}">
 					</div>
 				</div>

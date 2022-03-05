@@ -41,7 +41,7 @@ public class Cliente implements Serializable {
 	@Column(name = "CPF_CLIENTE", nullable = false, length = 11, unique = true)
 	private String cpf;
 
-	@Column(name = "CNPJ_CLIENTE", nullable = true, length = 11, unique = true)
+	@Column(name = "CNPJ_CLIENTE", nullable = true, length = 14)
 	private String cnpj;
 
 	@Column(name = "RG_CLIENTE", nullable = false, length = 15, unique = true)
