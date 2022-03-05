@@ -16,5 +16,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long>, JpaSpec
 	boolean existsByTituloEleitor(String tituloEleitor);
 
 	boolean existsByEmail(String email);
+	
+	boolean existsByCnpj(String cnpj);
 
 }

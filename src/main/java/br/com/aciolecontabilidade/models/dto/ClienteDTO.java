@@ -1,6 +1,5 @@
 package br.com.aciolecontabilidade.models.dto;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.validation.constraints.Email;
@@ -19,30 +18,30 @@ import lombok.Setter;
 public class ClienteDTO {
 
 	private Long id;
-	@NotNull
+	@NotEmpty
 	@Size(min = 3, max = 100)
 	private String nomeCliente;
-	@NotNull
+	@Size(max = 200)
+	private String nomeFantasia;
+	@NotEmpty
 	@CPF
 	private String cpfCliente;
-	@NotNull
+//	@CNPJ
+	private String cnpj;
 	@NotEmpty
 	@Size(min = 3, max = 15)
 	private String rgCliente;
-	@NotNull
 	@NotEmpty
 	@Size(min = 3, max = 12)
 	private String tituloEleitorCliente;
-	@NotNull
 	@NotEmpty
 	@Size(max = 16)
 	private String numContato;
-	@NotNull
-	@NotEmpty
 	@Email
 	private String email;
 	@NotNull
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dtNascimento;
-	private BigDecimal ultimoValorCobrado;
+	@Size(min = 4, max = 50)
+	private String senhaGov;
 }
