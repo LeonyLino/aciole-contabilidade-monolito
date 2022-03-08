@@ -1,0 +1,58 @@
+<html th:replace="~{base :: template (~{:: div})}">
+
+<body>
+	<div>
+		<div th:replace="~{base :: titulo('Detalhes do Cliente')}" />
+
+		<div class="d-flex justify-content-between">
+			<div class="container-fluid">
+
+			</div>
+			<span class="mb-3 mr-2">
+				<a type="button" class="btn btn-outline-dark" href="form">Cadastrar Serviço</a>
+			</span>
+		</div>
+		<dl class="row">
+			<dt class="col-sm-3">Nome</dt>
+			<dd class="col-sm-9" th:text="${cliente.nome}"></dd>
+
+			<dt class="col-sm-3" th:if="${cliente.nomeFantasia} != ''">Nome Fantasia</dt>
+			<dd class="col-sm-9" th:if="${cliente.nomeFantasia} != ''" th:text="${cliente.nomeFantasia}">
+			</dd>
+
+			<dt class="col-sm-3">CPF</dt>
+			<dd class="col-sm-9" th:text="${cliente.cpf}"></dd>
+
+			<dt class="col-sm-3" th:if="${cliente.nomeFantasia} != ''">CNPJ</dt>
+			<dd class="col-sm-9" th:if="${cliente.nomeFantasia} != ''"th:text="${cliente.cnpj}"></dd>
+			
+			<dt class="col-sm-3">RG</dt>
+			<dd class="col-sm-9" th:text="${cliente.rg}"></dd>
+			
+			<dt class="col-sm-3">Título de Eleitor</dt>
+			<dd class="col-sm-9" th:text="${cliente.tituloEleitor}"></dd>
+			
+			<dt class="col-sm-3">Contatos</dt>
+			<dd class="col-sm-9">
+				<dl class="row">
+					<dt class="col-sm-4">Telefone</dt>
+					<dd class="col-sm-8" th:text="${cliente.numContato}"></dd>
+						
+						<dt class="col-sm-4">E-mail</dt>
+					<dd class="col-sm-8" th:text="${cliente.email}"></dd>
+				</dl>
+			</dd>
+			
+			<dt class="col-sm-3">Data de nascimento</dt>
+			<dd class="col-sm-9" th:text="${#temporals.format(cliente.dtNascimento, 'dd/MM/yyyy')}"></dd>
+			
+			<dt class="col-sm-3">Senha Gov</dt>
+			<dd class="col-sm-9" th:text="${cliente.senhaGov}"></dd>
+			
+			<dt class="col-sm-3">teste id</dt>
+			<dd class="col-sm-9" th:text="${cliente.id}"></dd>
+		</dl>
+
+</body>
+
+</html>

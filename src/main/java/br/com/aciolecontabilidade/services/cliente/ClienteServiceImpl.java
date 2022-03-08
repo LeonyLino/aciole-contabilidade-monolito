@@ -9,10 +9,13 @@ import org.springframework.stereotype.Service;
 
 import br.com.aciolecontabilidade.enums.FlagAtivoEnum;
 import br.com.aciolecontabilidade.exceptions.ClienteEncontradoException;
+import br.com.aciolecontabilidade.exceptions.EntidadeNaoEncontradaException;
 import br.com.aciolecontabilidade.models.Cliente;
 import br.com.aciolecontabilidade.models.dto.ClienteDTO;
 import br.com.aciolecontabilidade.models.dto.ClienteDTOOut;
+import br.com.aciolecontabilidade.models.dto.DetalharClienteDTO;
 import br.com.aciolecontabilidade.models.dto.converter.ClienteDTOConverter;
+import br.com.aciolecontabilidade.models.dto.converter.DetalharClienteDTOConverter;
 import br.com.aciolecontabilidade.repository.ClienteRepository;
 import br.com.aciolecontabilidade.utils.StringUtil;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +26,7 @@ public class ClienteServiceImpl implements ClienteService {
 
 	private final ClienteRepository cRepository;
 	private final ClienteDTOConverter cDTOConverter;
+	private final DetalharClienteDTOConverter dcDTOConverter;
 
 	@Override
 	@Transactional
@@ -69,6 +73,15 @@ public class ClienteServiceImpl implements ClienteService {
 //		PageRequest paginacao = PageRequest.of(0, 10, sort);
 		return cRepository.findAll().stream().map(cDTOConverter::convert).collect(Collectors.toList());
 
+	}
+
+	private Cliente buscarPorId(Long id) {
+		return cRepository.findById(id).orElseThrow(EntidadeNaoEncontradaException::new);
+	}
+
+	@Override
+	public DetalharClienteDTO buscarPorIdPraDetalhe(Long id) {
+		return dcDTOConverter.convert(this.buscarPorId(id));
 	}
 
 }
