@@ -22,6 +22,7 @@
 					<th>Telefone</th>
 					<th>E-mail</th>
 					<th>Data Nascimento</th>
+					<th>Ações</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -33,6 +34,11 @@
 					<th th:text="${cliente.numContato}"></th>
 					<th th:text="${cliente.email}"></th>
 					<th th:text="${#temporals.format(cliente.dtNascimento, 'dd/MM/yyyy')}"></th>
+					<th>
+						<span class="mb-3 mr-2">
+							<a type="button" class="btn btn-outline-dark" th:href="@{'detalhar/' + ${cliente.id}}" th:text="Detalhar"></a>
+						</span>
+					</th>
 				</tr>
 
 			</tbody>
