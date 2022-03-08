@@ -83,5 +83,9 @@ public class Cliente implements Serializable {
 		this.senhaGov = senhaGov;
 		this.ativo = ativo;
 	}
+	
+	public Cliente(Long id) {
+		this.id = id;
+	}
 
 }

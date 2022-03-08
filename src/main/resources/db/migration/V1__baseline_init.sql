@@ -17,6 +17,7 @@ CREATE TABLE tb_servico (
 	id_servico SERIAL PRIMARY KEY,
 	tipo_servico VARCHAR(11) NOT NULL,
 	valor_servico DECIMAL(10,2) NOT NULL,
+	data_servico date NOT NULL,
 	fk_cliente INTEGER NOT NULL,
 	FOREIGN KEY (fk_cliente) REFERENCES tb_cliente (id_cliente)
 );
