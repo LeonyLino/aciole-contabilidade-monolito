@@ -78,5 +78,5 @@ public class ClienteController {
 		mv.addObject("cliente", cService.buscarPorIdPraDetalhe(Long.valueOf(id)));
 		return mv;
 	}
-
+	
 }

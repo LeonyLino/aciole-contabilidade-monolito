@@ -25,7 +25,7 @@ import lombok.Setter;
 @SequenceGenerator(name = "TB_CLIENTE_ID_CLIENTE_SEQ", sequenceName = "TB_CLIENTE_ID_CLIENTE_SEQ", initialValue = 1, allocationSize = 1)
 public class Cliente implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 902775680493951647L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "TB_CLIENTE_ID_CLIENTE_SEQ")
@@ -83,7 +83,7 @@ public class Cliente implements Serializable {
 		this.senhaGov = senhaGov;
 		this.ativo = ativo;
 	}
-	
+
 	public Cliente(Long id) {
 		this.id = id;
 	}

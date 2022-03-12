@@ -7,8 +7,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum TipoServicoEnum {
 	
-	DECLARACAO_IRPF("Declaração IRPF"), DECLARACAO_IRPJ("Declaração IRPJ");
+	DECLARACAO_IRPF(1, "Declaração IRPF"), DECLARACAO_IRPJ(2, "Declaração IRPJ");
 
+	private Integer id;
 	private String descricao;
 
 }

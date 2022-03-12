@@ -61,7 +61,7 @@ public class ClienteServiceImpl implements ClienteService {
 			throw new ClienteEncontradoException("E-mail: " + dto.getEmail());
 		}
 
-		if (cRepository.existsByCnpj(dto.getCnpj())) {
+		if (dto.getCnpj() != null && cRepository.existsByCnpj(dto.getCnpj())) {
 			throw new ClienteEncontradoException("CNPJ: " + dto.getCnpj());
 		}
 
@@ -75,7 +75,7 @@ public class ClienteServiceImpl implements ClienteService {
 
 	}
 
-	private Cliente buscarPorId(Long id) {
+	public Cliente buscarPorId(Long id) {
 		return cRepository.findById(id).orElseThrow(EntidadeNaoEncontradaException::new);
 	}
 
