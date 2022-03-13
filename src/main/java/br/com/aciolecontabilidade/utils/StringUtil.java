@@ -48,4 +48,8 @@ public class StringUtil {
 		Matcher matcher = pattern.matcher(email);
 		return matcher.matches();
 	}
+	
+	public static String substituirPorPonto(String valor) {
+		return valor.replace(",", ".");
+	}
 }

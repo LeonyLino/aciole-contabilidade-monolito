@@ -13,13 +13,23 @@ CREATE TABLE tb_cliente (
 	ativo_cliente CHAR(1) DEFAULT 'N' NOT NULL
 );
 
+CREATE TABLE tb_tipo_servico (
+	id_tipo SERIAL PRIMARY KEY,
+	ds_tipo VARCHAR(50) NOT NULL
+);
+INSERT INTO tb_tipo_servico VALUES (DEFAULT, 'Declaração IRPF');
+INSERT INTO tb_tipo_servico VALUES (DEFAULT, 'Declaração IRPJ');
+
 CREATE TABLE tb_servico (
 	id_servico SERIAL PRIMARY KEY,
-	tipo_servico VARCHAR(11) NOT NULL,
 	valor_servico DECIMAL(10,2) NOT NULL,
+	data_servico date NOT NULL,
+	fk_tipo_servico INTEGER NOT NULL,
 	fk_cliente INTEGER NOT NULL,
+	FOREIGN KEY (fk_tipo_servico) REFERENCES tb_tipo_servico (id_tipo),
 	FOREIGN KEY (fk_cliente) REFERENCES tb_cliente (id_cliente)
 );
+
 
 CREATE TABLE users(
 	username VARCHAR(50) NOT NULL PRIMARY KEY,

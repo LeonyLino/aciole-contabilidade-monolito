@@ -35,9 +35,18 @@
 					<th th:text="${cliente.email}"></th>
 					<th th:text="${#temporals.format(cliente.dtNascimento, 'dd/MM/yyyy')}"></th>
 					<th>
-						<span class="mb-3 mr-2">
-							<a type="button" class="btn btn-outline-dark" th:href="@{'detalhar/' + ${cliente.id}}" th:text="Detalhar"></a>
-						</span>
+						<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+							<div class="btn-group" role="group">
+								<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+									data-bs-toggle="dropdown" aria-expanded="false">
+									Ações
+								</button>
+								<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+									<li><a type="button" class="dropdown-item" th:href="@{'detalhar/' + ${cliente.id}}"
+											th:text="Detalhar"></a></li>
+								</ul>
+							</div>
+						</div>
 					</th>
 				</tr>
 

@@ -22,6 +22,6 @@ public class DetalharClienteDTO {
 	private String email;
 	private LocalDate dtNascimento;
 	private String senhaGov;
-	private Character ativo;
+	private boolean ativo;
 	private List<Servico> servicos;
 }

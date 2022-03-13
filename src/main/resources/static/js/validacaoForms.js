@@ -5,4 +5,5 @@ $(document).ready(function() {
 	$("#cnpj").mask("00.000.000/0000-00");
 	$("#rgCliente").mask("000000000000000");
 	$("#tituloEleitorCliente").mask("000000000000");
+	$('#valorServico').mask('###.##0,00', {reverse: true});
 });

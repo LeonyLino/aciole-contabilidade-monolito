@@ -15,7 +15,7 @@ public class DetalharClienteDTOConverter implements Converter<Cliente, DetalharC
 				.nomeFantasia(cliente.getNomeFantasia()).cpf(cliente.getCpf()).cnpj(cliente.getCnpj())
 				.rg(cliente.getRg()).tituloEleitor(cliente.getTituloEleitor())
 				.numContato(cliente.getNumContato()).email(cliente.getEmail()).dtNascimento(cliente.getDtNascimento())
-				.senhaGov(cliente.getSenhaGov()).ativo(cliente.getAtivo()).servicos(cliente.getServicos()).build();
+				.senhaGov(cliente.getSenhaGov()).ativo(cliente.getAtivo().equals('S')).servicos(cliente.getServicos()).build();
 	}
 
 }
