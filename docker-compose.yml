@@ -13,15 +13,15 @@ services:
     volumes:
       - "./springboot:/home/data"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/db_aciole_contabilidade
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresaciole:5432/db_aciole_contabilidade
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       
-  postgres:
+  postgresaciole:
     image: postgres
     restart: always
-    container_name: postgres
+    container_name: postgresaciole
     ports:
       - 5432:5432
     environment:
@@ -46,7 +46,7 @@ services:
     networks:
       - aciole-compose-network
     depends_on:
-      - postgres
+      - postgresaciole
    
   
 networks: 

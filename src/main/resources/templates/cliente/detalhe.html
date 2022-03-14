@@ -51,8 +51,8 @@
 			<dt class="col-sm-3">Senha Gov</dt>
 			<dd class="col-sm-9" th:text="${cliente.senhaGov}"></dd>
 
-			<dt class="col-sm-3">Serviços</dt>
-			<dd class="col-sm-9">
+			<dt class="col-sm-3" th:if="${cliente.servicos != null and !cliente.servicos.empty}">Serviços</dt>
+			<dd class="col-sm-9" th:if="${cliente.servicos != null and !cliente.servicos.empty}">
 				<dl class="row" th:each="servico : ${cliente.servicos}">
 					<dt class="col-sm-4" th:text="${servico.tipo.descricao}"></dt>
 					<dl class="row">
