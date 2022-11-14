@@ -11,7 +11,7 @@ public class ClienteDTOConverter implements Converter<Cliente, ClienteDTOOut> {
 
 	@Override
 	public ClienteDTOOut convert(Cliente cliente) {
-		return ClienteDTOOut.builder().id(cliente.getId()).nomeCliente(cliente.getNome()).cpfCliente(cliente.getCpf())
+		return ClienteDTOOut.builder().id(cliente.getId()).nomeCliente(cliente.getNome()).cpfCliente(cliente.getCpfCnpj())
 				.rgCliente(cliente.getRg()).tituloEleitorCliente(cliente.getTituloEleitor())
 				.numContato(cliente.getNumContato()).email(cliente.getEmail()).dtNascimento(cliente.getDtNascimento())
 				.build();

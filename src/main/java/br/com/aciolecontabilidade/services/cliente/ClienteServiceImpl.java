@@ -11,8 +11,8 @@ import br.com.aciolecontabilidade.enums.FlagAtivoEnum;
 import br.com.aciolecontabilidade.exceptions.ClienteEncontradoException;
 import br.com.aciolecontabilidade.exceptions.EntidadeNaoEncontradaException;
 import br.com.aciolecontabilidade.models.Cliente;
-import br.com.aciolecontabilidade.models.dto.ClienteDTO;
 import br.com.aciolecontabilidade.models.dto.ClienteDTOOut;
+import br.com.aciolecontabilidade.models.dto.ClientePFDTO;
 import br.com.aciolecontabilidade.models.dto.DetalharClienteDTO;
 import br.com.aciolecontabilidade.models.dto.converter.ClienteDTOConverter;
 import br.com.aciolecontabilidade.models.dto.converter.DetalharClienteDTOConverter;
@@ -30,39 +30,35 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	@Transactional
-	public void cadastrar(ClienteDTO dto) throws ClienteEncontradoException {
+	public void cadastrar(ClientePFDTO dto) throws ClienteEncontradoException {
 
-		dto.setCpfCliente(StringUtil.removerMascara(dto.getCpfCliente()));
-		dto.setNumContato(StringUtil.removerMascara(dto.getNumContato()));
-		dto.setCnpj(!dto.getCnpj().isEmpty() ? StringUtil.removerMascara(dto.getCnpj()) : null);
+		dto.setCpfCnpjPF(StringUtil.removerMascara(dto.getCpfCnpjPF()));
+		dto.setNumContatoPF(StringUtil.removerMascara(dto.getNumContatoPF()));
+		dto.setCpfCnpjPF(!dto.getCpfCnpjPF().isEmpty() ? StringUtil.removerMascara(dto.getCpfCnpjPF()) : null);
 
-		this.verificaExistenciaCliente(dto);
-		cRepository.save(new Cliente(dto.getNomeCliente(), dto.getNomeFantasia(), dto.getCpfCliente(), dto.getCnpj(),
-				dto.getRgCliente(), dto.getTituloEleitorCliente(), dto.getNumContato(), dto.getEmail(),
-				dto.getDtNascimento(), dto.getSenhaGov(), FlagAtivoEnum.SIM.getChave()));
+		this.validarDadosExistentes(dto);
+		cRepository.save(new Cliente(null, dto.getNomePF(), dto.getCpfCnpjPF(), dto.getRgPF(), dto.getTituloPF(),
+				dto.getNumContatoPF(), dto.getEmailPF(), dto.getDtNascimentoPF(), null, FlagAtivoEnum.SIM.getChave(),
+				null));
 
 	}
 
-	private void verificaExistenciaCliente(ClienteDTO dto) throws ClienteEncontradoException {
+	private void validarDadosExistentes(ClientePFDTO dto) throws ClienteEncontradoException {
 
-		if (cRepository.existsByCpf(dto.getCpfCliente())) {
-			throw new ClienteEncontradoException("CPF: " + dto.getCpfCliente());
+		if (cRepository.existsByCpfCnpj(dto.getCpfCnpjPF())) {
+			throw new ClienteEncontradoException("CPF: " + dto.getCpfCnpjPF());
 		}
 
-		if (cRepository.existsByRg(dto.getRgCliente())) {
-			throw new ClienteEncontradoException("RG: " + dto.getRgCliente());
+		if (cRepository.existsByRg(dto.getRgPF())) {
+			throw new ClienteEncontradoException("RG: " + dto.getRgPF());
 		}
 
-		if (cRepository.existsByTituloEleitor(dto.getTituloEleitorCliente())) {
-			throw new ClienteEncontradoException("Título de Eleitor: " + dto.getTituloEleitorCliente());
+		if (cRepository.existsByTituloEleitor(dto.getTituloPF())) {
+			throw new ClienteEncontradoException("Título de Eleitor: " + dto.getTituloPF());
 		}
 
-		if (cRepository.existsByEmail(dto.getEmail())) {
-			throw new ClienteEncontradoException("E-mail: " + dto.getEmail());
-		}
-
-		if (dto.getCnpj() != null && cRepository.existsByCnpj(dto.getCnpj())) {
-			throw new ClienteEncontradoException("CNPJ: " + dto.getCnpj());
+		if (cRepository.existsByEmail(dto.getEmailPF())) {
+			throw new ClienteEncontradoException("E-mail: " + dto.getCpfCnpjPF());
 		}
 
 	}

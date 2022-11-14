@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.aciolecontabilidade.enums.TipoClienteEnum;
 import br.com.aciolecontabilidade.exceptions.ClienteEncontradoException;
-import br.com.aciolecontabilidade.models.dto.ClienteDTO;
+import br.com.aciolecontabilidade.models.dto.ClientePFDTO;
 import br.com.aciolecontabilidade.services.cliente.ClienteService;
 import lombok.RequiredArgsConstructor;
 
@@ -35,17 +36,18 @@ public class ClienteController {
 	}
 
 	@GetMapping("/form")
-	public ModelAndView cadastrar(ClienteDTO clienteDTO, BindingResult resul, Principal principal) {
+	public ModelAndView cadastrar(ClientePFDTO clienteDTO, BindingResult resul, Principal principal) {
 
 		ModelAndView mv = new ModelAndView("cliente/form-cadastro-cliente");
 		mv.addObject("itemMenu", "cliente");
 		mv.addObject("nomeUser", principal.getName());
+		mv.addObject("tiposClientes", TipoClienteEnum.values());
 
 		return mv;
 	}
 
 	@PostMapping
-	public ModelAndView salvar(@Valid ClienteDTO clienteDTO, BindingResult result, Model model, Principal principal) {
+	public ModelAndView salvar(@Valid ClientePFDTO clienteDTO, BindingResult result, Model model, Principal principal) {
 		ModelAndView mv = new ModelAndView("redirect:/cliente/listar");
 		try {
 			if (result.hasErrors()) {
@@ -62,7 +64,7 @@ public class ClienteController {
 	}
 
 	@GetMapping("/listar")
-	public ModelAndView listar(Principal principal, ClienteDTO dto) {
+	public ModelAndView listar(Principal principal, ClientePFDTO dto) {
 		ModelAndView mv = new ModelAndView("cliente/listar");
 		mv.addObject("itemMenu", "cliente");
 		mv.addObject("nomeUser", principal.getName());

@@ -12,7 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
+import br.com.aciolecontabilidade.enums.TipoClienteEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +27,10 @@ import lombok.Setter;
 @SequenceGenerator(name = "TB_CLIENTE_ID_CLIENTE_SEQ", sequenceName = "TB_CLIENTE_ID_CLIENTE_SEQ", initialValue = 1, allocationSize = 1)
 public class Cliente implements Serializable {
 
+	public Cliente(Object object, String nomePF, String cpfCnpjPF, String rgPF, String tituloPF, String numContatoPF,
+			String emailPF, @NotNull LocalDate dtNascimentoPF, Object object2, Character chave, Object object3) {
+	}
+
 	private static final long serialVersionUID = 902775680493951647L;
 
 	@Id
@@ -35,19 +41,13 @@ public class Cliente implements Serializable {
 	@Column(name = "NOME_CLIENTE", nullable = false, length = 100)
 	private String nome;
 
-	@Column(name = "NOME_FANTASIA_CLIENTE", nullable = true, length = 200)
-	private String nomeFantasia;
+	@Column(name = "CPF_CNPJ_CLIENTE", nullable = false, length = 14, unique = true)
+	private String cpfCnpj;
 
-	@Column(name = "CPF_CLIENTE", nullable = false, length = 11, unique = true)
-	private String cpf;
-
-	@Column(name = "CNPJ_CLIENTE", nullable = true, length = 14)
-	private String cnpj;
-
-	@Column(name = "RG_CLIENTE", nullable = false, length = 15, unique = true)
+	@Column(name = "RG_CLIENTE", nullable = true, length = 15, unique = true)
 	private String rg;
 
-	@Column(name = "TITULO_ELEITOR_CLIENTE", nullable = false, length = 12, unique = true)
+	@Column(name = "TITULO_ELEITOR_CLIENTE", nullable = true, length = 12, unique = true)
 	private String tituloEleitor;
 
 	@Column(name = "NUM_CONTATO_CLIENTE", nullable = true, length = 11)
@@ -60,32 +60,16 @@ public class Cliente implements Serializable {
 //	@Convert(converter = LocalDateConverter.class)
 	private LocalDate dtNascimento;
 
-	@Column(name = "SENHA_GOV_CLIENTE", nullable = true, length = 50)
-	private String senhaGov;
+	@OneToMany(mappedBy = "cliente")
+	private List<AcessoPortal> senhas;
 
-	@Column(name = "ATIVO_CLIENTE", nullable = false, length = 1)
-	private Character ativo;
+	@Column(name = "FIXO_CLIENTE", nullable = false, length = 1)
+	private Character fixo;
+	
+	@Column(name = "TIPO_CLIENTE", nullable = true, length = 4)
+	private TipoClienteEnum tipo;
 
 	@OneToMany(mappedBy = "cliente")
 	private List<Servico> servicos;
-
-	public Cliente(String nome, String nomeFantasia, String cpf, String cnpj, String rg, String tituloEleitor,
-			String numContato, String email, LocalDate dtNascimento, String senhaGov, Character ativo) {
-		this.nome = nome;
-		this.nomeFantasia = nomeFantasia;
-		this.cpf = cpf;
-		this.cnpj = cnpj;
-		this.rg = rg;
-		this.tituloEleitor = tituloEleitor;
-		this.numContato = numContato;
-		this.email = email;
-		this.dtNascimento = dtNascimento;
-		this.senhaGov = senhaGov;
-		this.ativo = ativo;
-	}
-
-	public Cliente(Long id) {
-		this.id = id;
-	}
 
 }

@@ -8,63 +8,60 @@
 			<div class="alert alert-dark" role="alert" th:if="${errorMessage}">
 				<div th:text="${errorMessage}" />
 			</div>
-			<form th:object="${clienteDTO}" class="card-body" action="/cliente" method="POST">
+			<form th:object="${clientePFDTO}" class="card-body" action="/cliente" method="POST">
 				<div class="form-group">
-					<label for="nomeCliente">Nome</label>
-					<input th:field="*{nomeCliente}" th:errorClass="is-invalid" class="form-control" maxlength="100" />
-					<div class="invalid-feedback" th:errors="*{nomeCliente}">
+					<label for="nomePF">Nome</label>
+					<input th:field="*{nomePF}" th:errorClass="is-invalid" class="form-control" maxlength="100"
+						minlength="3" />
+					<div class="invalid-feedback" th:errors="*{nomePF}">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="nomeFantasia">Nome Fantasia</label>
-					<input th:field="*{nomeFantasia}" th:errorClass="is-invalid" class="form-control" maxlength="200" />
-					<div class="invalid-feedback" th:errors="*{nomeFantasia}">
-					</div>
+					<label for="cpfCnpjPF">CPF</label>
+					<input th:field="*{cpfCnpjPF}" th:errorClass="is-invalid" class="form-control" />
+					<div class="invalid-feedback" th:errors="*{cpfCnpjPF}"></div>
 				</div>
 				<div class="form-group">
-					<label for="cpfCliente">CPF</label>
-					<input th:field="*{cpfCliente}" th:errorClass="is-invalid" class="form-control" />
-					<div class="invalid-feedback" th:errors="*{cpfCliente}"></div>
+					<label for="rgPF">RG</label>
+					<input th:field="*{rgPF}" th:errorClass="is-invalid" class="form-control" />
+					<div class="invalid-feedback" th:errors="*{rgPF}"></div>
 				</div>
 				<div class="form-group">
-					<label for="cnpj">CNPJ</label>
-					<input th:field="*{cnpj}" th:errorClass="is-invalid" class="form-control" />
-					<div class="invalid-feedback" th:errors="*{cnpj}"></div>
-				</div>
-				<div class="form-group">
-					<label for="rgCliente">RG</label>
-					<input th:field="*{rgCliente}" th:errorClass="is-invalid" class="form-control" />
-					<div class="invalid-feedback" th:errors="*{rgCliente}"></div>
-				</div>
-				<div class="form-group">
-					<label for="tituloEleitorCliente">Título de Eleitor</label>
-					<input th:field="*{tituloEleitorCliente}" th:errorClass="is-invalid" class="form-control" />
-					<div class="invalid-feedback" th:errors="*{tituloEleitorCliente}"></div>
+					<label for="tituloPF">Título de Eleitor</label>
+					<input th:field="*{tituloPF}" th:errorClass="is-invalid" class="form-control" />
+					<div class="invalid-feedback" th:errors="*{tituloPF}"></div>
 				</div>
 
 				<div class="form-group">
-					<label for="numContato">Nº Contato</label>
-					<input th:field="*{numContato}" th:errorClass="is-invalid" class="form-control" />
-					<div class="invalid-feedback" th:errors="*{numContato}"></div>
+					<label for="numContatoPF">Nº Contato</label>
+					<input th:field="*{numContatoPF}" th:errorClass="is-invalid" class="form-control" />
+					<div class="invalid-feedback" th:errors="*{numContatoPF}"></div>
 				</div>
 
 				<div class="form-group">
-					<label for="email">E-mail</label>
-					<input th:field="*{email}" th:errorClass="is-invalid" class="form-control" />
-					<div class="invalid-feedback" th:errors="*{email}"></div>
+					<label for="emailPF">E-mail</label>
+					<input th:field="*{emailPF}" th:errorClass="is-invalid" class="form-control" />
+					<div class="invalid-feedback" th:errors="*{emailPF}"></div>
 				</div>
 
 				<div class="form-group">
-					<label for="dtNascimento">Data Nascimento</label>
-					<input th:field="*{dtNascimento}" th:errorClass="is-invalid" class="form-control" />
-					<div class="invalid-feedback" th:errors="*{dtNascimento}">
+					<label for="dtNascimentoPF">Data Nascimento</label>
+					<input th:field="*{dtNascimentoPF}" th:errorClass="is-invalid" class="form-control" />
+					<div class="invalid-feedback" th:errors="*{dtNascimentoPF}">
 					</div>
 				</div>
 
+
 				<div class="form-group">
-					<label for="senhaGov">Senha Gov</label>
-					<input th:field="*{senhaGov}" th:errorClass="is-invalid" class="form-control" maxlength="50" />
-					<div class="invalid-feedback" th:errors="*{senhaGov}">
+					<label for="tipo">Tipo Cliente</label>
+					<select th:field="*{tipo}" id="tipoCliente" class="form-select"
+						aria-label=".form-select-sm example">
+						<option value="">...</option>
+						<option th:field="*{tipo}" th:each="tipo : ${tiposClientes}" th:value="${tipo}"
+							th:text="${tipo}">
+						</option>
+					</select>
+					<div class="invalid-feedback" th:errors="*{tipo}">
 					</div>
 				</div>
 
