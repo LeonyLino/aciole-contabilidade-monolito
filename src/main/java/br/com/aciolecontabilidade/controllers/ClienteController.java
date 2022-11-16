@@ -25,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class ClienteController {
 
 	private final ClienteService cService;
+	private static final String ITEM_MENU_CLIENTE = "cliente";
 
 	@GetMapping("/home")
 	public ModelAndView index(Principal principal) {
@@ -39,7 +40,7 @@ public class ClienteController {
 	public ModelAndView cadastrar(ClientePFDTO clienteDTO, BindingResult resul, Principal principal) {
 
 		ModelAndView mv = new ModelAndView("cliente/form-cadastro-cliente");
-		mv.addObject("itemMenu", "cliente");
+		mv.addObject("itemMenu", ITEM_MENU_CLIENTE);
 		mv.addObject("nomeUser", principal.getName());
 		mv.addObject("tiposClientes", TipoClienteEnum.values());
 
@@ -66,7 +67,7 @@ public class ClienteController {
 	@GetMapping("/listar")
 	public ModelAndView listar(Principal principal, ClientePFDTO dto) {
 		ModelAndView mv = new ModelAndView("cliente/listar");
-		mv.addObject("itemMenu", "cliente");
+		mv.addObject("itemMenu", ITEM_MENU_CLIENTE);
 		mv.addObject("nomeUser", principal.getName());
 		mv.addObject("clientes", cService.listar());
 		return mv;
@@ -75,9 +76,9 @@ public class ClienteController {
 	@GetMapping("/detalhar/{id}")
 	public ModelAndView listar(Principal principal, @PathVariable String id) {
 		ModelAndView mv = new ModelAndView("cliente/detalhe");
-		mv.addObject("itemMenu", "cliente");
+		mv.addObject("itemMenu", ITEM_MENU_CLIENTE);
 		mv.addObject("nomeUser", principal.getName());
-		mv.addObject("cliente", cService.buscarPorIdPraDetalhe(Long.valueOf(id)));
+		mv.addObject(ITEM_MENU_CLIENTE, cService.buscarPorIdPraDetalhe(Long.valueOf(id)));
 		return mv;
 	}
 	

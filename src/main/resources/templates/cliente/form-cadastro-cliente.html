@@ -17,7 +17,19 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="cpfCnpjPF">CPF</label>
+					<label for="tipo">Tipo Cliente</label>
+					<select th:field="*{tipo}"  class="form-select" aria-label=".form-select-sm example"
+						onchange="mudarNomeCampoCpfCnpj()" th:errorClass="is-invalid">
+						<option value="" selected>Please select...</option>
+						<option th:field="*{tipo}" th:each="tipo : ${tiposClientes}" th:value="${tipo}"
+							th:text="${tipo}">
+						</option>
+					</select>
+					<div class="invalid-feedback" th:errors="*{tipo}">
+					</div>
+				</div>
+				<div class="form-group" id="divCpfCnpj">
+					<label for="cpfCnpjPF" id="campoCpfCnpjPF">CPF</label>
 					<input th:field="*{cpfCnpjPF}" th:errorClass="is-invalid" class="form-control" />
 					<div class="invalid-feedback" th:errors="*{cpfCnpjPF}"></div>
 				</div>
@@ -52,18 +64,7 @@
 				</div>
 
 
-				<div class="form-group">
-					<label for="tipo">Tipo Cliente</label>
-					<select th:field="*{tipo}" id="tipoCliente" class="form-select"
-						aria-label=".form-select-sm example">
-						<option value="">...</option>
-						<option th:field="*{tipo}" th:each="tipo : ${tiposClientes}" th:value="${tipo}"
-							th:text="${tipo}">
-						</option>
-					</select>
-					<div class="invalid-feedback" th:errors="*{tipo}">
-					</div>
-				</div>
+
 
 				<button class="btn btn-primary mt-3" type="submit">Cadastrar</button>
 			</form>

@@ -41,8 +41,7 @@ public class ClientePFDTO {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dtNascimentoPF;
 	@NotEmpty
-	private List<AcessoPortalDTO> servicos;
-	@NotEmpty
+	@NotNull
 	private String tipo;
 	
 	public TipoClienteEnum getTipoServico() {

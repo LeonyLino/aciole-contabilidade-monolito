@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import br.com.aciolecontabilidade.enums.FlagAtivoEnum;
+import br.com.aciolecontabilidade.enums.FlagFixoEnum;
 import br.com.aciolecontabilidade.exceptions.ClienteEncontradoException;
 import br.com.aciolecontabilidade.exceptions.EntidadeNaoEncontradaException;
 import br.com.aciolecontabilidade.models.Cliente;
@@ -34,12 +34,11 @@ public class ClienteServiceImpl implements ClienteService {
 
 		dto.setCpfCnpjPF(StringUtil.removerMascara(dto.getCpfCnpjPF()));
 		dto.setNumContatoPF(StringUtil.removerMascara(dto.getNumContatoPF()));
-		dto.setCpfCnpjPF(!dto.getCpfCnpjPF().isEmpty() ? StringUtil.removerMascara(dto.getCpfCnpjPF()) : null);
 
 		this.validarDadosExistentes(dto);
-		cRepository.save(new Cliente(null, dto.getNomePF(), dto.getCpfCnpjPF(), dto.getRgPF(), dto.getTituloPF(),
-				dto.getNumContatoPF(), dto.getEmailPF(), dto.getDtNascimentoPF(), null, FlagAtivoEnum.SIM.getChave(),
-				null));
+		cRepository.save(new Cliente(null, null, dto.getNomePF(), dto.getCpfCnpjPF(), dto.getRgPF(), dto.getTituloPF(),
+				dto.getNumContatoPF(), dto.getEmailPF(), dto.getDtNascimentoPF(), null, FlagFixoEnum.SIM.getChave(),
+				dto.getTipoServico(), null));
 
 	}
 

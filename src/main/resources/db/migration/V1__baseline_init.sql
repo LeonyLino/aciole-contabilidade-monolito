@@ -1,6 +1,7 @@
 CREATE TABLE tb_cliente (
 	id_cliente SERIAL 		PRIMARY KEY,
 	nome_cliente 	 		VARCHAR(100) NOT NULL,
+	nome_fantasia			VARCHAR(100) UNIQUE,
 	cpf_cnpj_cliente 		VARCHAR(14) NOT NULL UNIQUE,
 	rg_cliente	 			VARCHAR(15) UNIQUE,
 	titulo_eleitor_cliente  VARCHAR(12) UNIQUE,
@@ -53,7 +54,7 @@ CREATE TABLE authorities (
 
 CREATE UNIQUE INDEX ix_auth_username ON authorities (username,authority);
 
-INSERT INTO users VALUES('LeonnyLino', '$2a$10$6FAlvgV3hBcyhVZ0UrAhquRtVcR91SKYEaczjF2.0BPY5mjmBpbYu', true);
+INSERT INTO users VALUES('LeonnyLino', '$2a$10$6FAlvgV3hBcyhVZ0UrAhquRtVcR91SKYEaczjF2.0BPY5mjmBpbYu', true); --lino321
 INSERT INTO authorities VALUES('LeonnyLino', 'ROLE_ADM');
 INSERT INTO users VALUES('Renata Aciole', '$2a$10$lZRq2wCt2BnaHVgKXOfBie7vhAlMhsAiOPLqpzsjC/rC2HdCB0VbK', true); --11062016
 INSERT INTO authorities VALUES('Renata Aciole', 'ROLE_ADM');
