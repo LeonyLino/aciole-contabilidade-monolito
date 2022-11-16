@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum FlagAtivoEnum {
+public enum FlagFixoEnum {
 
 	SIM('S', "Sim"), NAO('N', "Não");
 
