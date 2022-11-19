@@ -1,13 +1,13 @@
 package br.com.aciolecontabilidade.models.dto;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,36 +17,37 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ClientePFDTO {
+public class ClienteIRCadastroDTO {
 
 	private Long id;
 	@NotEmpty
 	@Size(min = 3, max = 100)
-	private String nomePF;
-	@NotEmpty
+	private String nomeIR;
 	@CPF
-	private String cpfCnpjPF;
+	private String cpfIR;
+	@CNPJ
+	private String cnpjIR;
 	@NotEmpty
 	@Size(min = 3, max = 15)
-	private String rgPF;
+	private String rgIR;
 	@NotEmpty
 	@Size(min = 3, max = 12)
-	private String tituloPF;
+	private String tituloIR;
 	@NotEmpty
 	@Size(max = 16)
-	private String numContatoPF;
+	private String numContatoIR;
 	@Email
-	private String emailPF;
+	private String emailIR;
 	@NotNull
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private LocalDate dtNascimentoPF;
+	private LocalDate dtNascimentoIR;
 	@NotEmpty
 	@NotNull
-	private String tipo;
+	private String tipoIR;
 	
-	public TipoClienteEnum getTipoServico() {
+	public TipoClienteEnum getTipoCliente() {
 		for (TipoClienteEnum tce : TipoClienteEnum.values()) {
-			if (tce.toString().equals(tipo)) {
+			if (tce.toString().equals(tipoIR)) {
 				return tce;
 			}
 		}
