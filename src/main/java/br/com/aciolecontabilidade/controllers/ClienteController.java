@@ -48,7 +48,8 @@ public class ClienteController {
 	}
 
 	@PostMapping
-	public ModelAndView salvar(@Valid ClienteIRCadastroDTO clienteDTO, BindingResult result, Model model, Principal principal) {
+	public ModelAndView salvar(@Valid ClienteIRCadastroDTO clienteDTO, BindingResult result, Model model,
+			Principal principal) {
 		ModelAndView mv = new ModelAndView("redirect:/cliente/listar");
 		try {
 			if (result.hasErrors()) {
@@ -72,7 +73,7 @@ public class ClienteController {
 		mv.addObject("clientes", cService.listar());
 		return mv;
 	}
-	
+
 	@GetMapping("/detalhar/{id}")
 	public ModelAndView listar(Principal principal, @PathVariable String id) {
 		ModelAndView mv = new ModelAndView("cliente/detalhe");
@@ -81,5 +82,5 @@ public class ClienteController {
 		mv.addObject(ITEM_MENU_CLIENTE, cService.buscarPorIdPraDetalhe(Long.valueOf(id)));
 		return mv;
 	}
-	
+
 }

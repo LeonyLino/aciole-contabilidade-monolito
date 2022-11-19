@@ -32,44 +32,32 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	@Transactional
 	public void cadastrar(ClienteIRCadastroDTO dto) throws ClienteEncontradoException {
-		String documento = "";
-
-		if (dto.getTipoCliente().equals(TipoClienteEnum.PF)) {
-			documento = StringUtil.removerMascara(dto.getCpfIR());
-		} else {
-			documento = StringUtil.removerMascara(dto.getCnpjIR());
-		}
+		String documento = StringUtil
+				.removerMascara(dto.getTipoCliente().equals(TipoClienteEnum.PF) ? dto.getCpfIR() : dto.getCnpjIR());
 
 		dto.setNumContatoIR(StringUtil.removerMascara(dto.getNumContatoIR()));
 
-		this.validarDadosExistentes(dto);
+		this.validarDadosExistentes(dto, documento);
 		cRepository.save(new Cliente(null, null, dto.getNomeIR(), documento, dto.getRgIR(), dto.getTituloIR(),
 				dto.getNumContatoIR(), dto.getEmailIR(), dto.getDtNascimentoIR(), null, FlagFixoEnum.NAO.getChave(),
 				dto.getTipoCliente(), null));
 
 	}
 
-	private void validarDadosExistentes(ClienteIRCadastroDTO dto) throws ClienteEncontradoException {
+	private void validarDadosExistentes(ClienteIRCadastroDTO dto, String documento) throws ClienteEncontradoException {
 
-		if (dto.getTipoCliente().equals(TipoClienteEnum.PF) && cRepository.existsByCpf(dto.getCpfIR())) {
-			throw new ClienteEncontradoException("CPF: " + dto.getCpfIR());
-		}
+		if (cRepository.existsByCpfCnpj(documento))
+			throw new ClienteEncontradoException(
+					dto.getTipoCliente().equals(TipoClienteEnum.PF) ? "CPF: " : "CNPJ: " + documento);
 
-		if (dto.getTipoCliente().equals(TipoClienteEnum.PJ) && cRepository.existsByCnpj(dto.getCpfIR())) {
-			throw new ClienteEncontradoException("CPF: " + dto.getCpfIR());
-		}
-
-		if (cRepository.existsByRg(dto.getRgIR())) {
+		if (cRepository.existsByRg(dto.getRgIR()))
 			throw new ClienteEncontradoException("RG: " + dto.getRgIR());
-		}
 
-		if (cRepository.existsByTituloEleitor(dto.getTituloIR())) {
+		if (cRepository.existsByTituloEleitor(dto.getTituloIR()))
 			throw new ClienteEncontradoException("Título de Eleitor: " + dto.getTituloIR());
-		}
 
-		if (cRepository.existsByEmail(dto.getEmailIR())) {
+		if (cRepository.existsByEmail(dto.getEmailIR()))
 			throw new ClienteEncontradoException("E-mail: " + dto.getEmailIR());
-		}
 
 	}
 
