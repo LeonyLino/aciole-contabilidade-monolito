@@ -9,12 +9,14 @@ import br.com.aciolecontabilidade.models.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long>, JpaSpecificationExecutor<Cliente> {
 
-	boolean existsByCpfCnpj(String cpf);
+	boolean existsByCpf(String cpf);
+
+	boolean existsByCnpj(String cnpj);
 
 	boolean existsByRg(String rg);
 
 	boolean existsByTituloEleitor(String tituloEleitor);
 
 	boolean existsByEmail(String email);
-	
+
 }

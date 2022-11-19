@@ -8,7 +8,7 @@
 			<div class="alert alert-dark" role="alert" th:if="${errorMessage}">
 				<div th:text="${errorMessage}" />
 			</div>
-			<form th:object="${clientePFDTO}" class="card-body" action="/cliente" method="POST">
+			<form th:object="${clienteIRCadastroDTO}" class="card-body" action="/cliente" method="POST">
 				<div class="form-group">
 					<label for="nomePF">Nome</label>
 					<input th:field="*{nomePF}" th:errorClass="is-invalid" class="form-control" maxlength="100"
@@ -19,7 +19,7 @@
 				<div class="form-group">
 					<label for="tipo">Tipo Cliente</label>
 					<select th:field="*{tipo}"  class="form-select" aria-label=".form-select-sm example"
-						onchange="mudarNomeCampoCpfCnpj()" th:errorClass="is-invalid">
+						 onchange="mudarNomeCampoCpfCnpj()" th:errorClass="is-invalid">
 						<option value="" selected>Please select...</option>
 						<option th:field="*{tipo}" th:each="tipo : ${tiposClientes}" th:value="${tipo}"
 							th:text="${tipo}">
@@ -28,10 +28,15 @@
 					<div class="invalid-feedback" th:errors="*{tipo}">
 					</div>
 				</div>
-				<div class="form-group" id="divCpfCnpj">
-					<label for="cpfCnpjPF" id="campoCpfCnpjPF">CPF</label>
-					<input th:field="*{cpfCnpjPF}" th:errorClass="is-invalid" class="form-control" />
-					<div class="invalid-feedback" th:errors="*{cpfCnpjPF}"></div>
+				<div class="form-group" id="divCpf">
+					<label for="cpf" id="campoCpf">CPF</label>
+					<input th:field="*{cpf}" th:errorClass="is-invalid" class="form-control" />
+					<div class="invalid-feedback" th:errors="*{cpf}"></div>
+				</div>
+				<div class="form-group" id="divCnpj">
+					<label for="cnpj" id="campoCnpj">CNPJ</label>
+					<input th:field="*{cnpj}" th:errorClass="is-invalid" class="form-control" />
+					<div class="invalid-feedback" th:errors="*{cnpj}"></div>
 				</div>
 				<div class="form-group">
 					<label for="rgPF">RG</label>
