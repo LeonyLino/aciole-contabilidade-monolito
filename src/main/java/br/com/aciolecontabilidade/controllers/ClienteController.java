@@ -37,12 +37,15 @@ public class ClienteController {
 	}
 
 	@GetMapping("/form")
-	public ModelAndView cadastrar(ClienteIRCadastroDTO clienteDTO, BindingResult resul, Principal principal) {
+	public ModelAndView cadastrar(ClienteIRCadastroDTO clienteDTO, BindingResult resul, Principal principal,
+			String mensagem) {
 
 		ModelAndView mv = new ModelAndView("cliente/form-cadastro-cliente");
 		mv.addObject("itemMenu", ITEM_MENU_CLIENTE);
 		mv.addObject("nomeUser", principal.getName());
 		mv.addObject("tiposClientes", TipoClienteEnum.values());
+		if (mensagem != null)
+			mv.addObject("errorMessage", mensagem);
 
 		return mv;
 	}
@@ -52,14 +55,13 @@ public class ClienteController {
 			Principal principal) {
 		ModelAndView mv = new ModelAndView("redirect:/cliente/listar");
 		try {
-			if (result.hasErrors()) {
-				return this.cadastrar(clienteDTO, result, principal);
+			if (cService.validarFormClienteIR(result, clienteDTO)) {
+				return this.cadastrar(clienteDTO, result, principal, null);
 			}
 
 			cService.cadastrar(clienteDTO);
 		} catch (ClienteEncontradoException e) {
-			mv.setViewName("cliente/form-cadastro-cliente");
-			mv.addObject("errorMessage", e.getMessage());
+			return this.cadastrar(clienteDTO, result, principal, e.getMessage());
 		}
 
 		return mv;

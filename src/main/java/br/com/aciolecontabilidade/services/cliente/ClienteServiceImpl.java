@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import br.com.aciolecontabilidade.enums.FlagFixoEnum;
 import br.com.aciolecontabilidade.enums.TipoClienteEnum;
@@ -76,6 +77,17 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public DetalharClienteDTO buscarPorIdPraDetalhe(Long id) {
 		return dcDTOConverter.convert(this.buscarPorId(id));
+	}
+
+	@Override
+	public boolean validarFormClienteIR(BindingResult result, ClienteIRCadastroDTO dto) {
+		return (result.hasErrors()
+				&& (dto.getTipoCliente() != null && dto.getTipoCliente().equals(TipoClienteEnum.PF)
+						&& result.hasFieldErrors("cpfIR"))
+				|| (dto.getTipoCliente() != null && dto.getTipoCliente().equals(TipoClienteEnum.PJ)
+						&& result.hasFieldErrors("cnpjIR"))
+				|| (!dto.getTituloIR().isBlank() && result.hasFieldErrors("tituloIR")))
+				|| (result.hasErrors() && result.getErrorCount() > 2);
 	}
 
 }

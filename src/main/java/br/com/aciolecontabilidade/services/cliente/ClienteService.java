@@ -2,6 +2,8 @@ package br.com.aciolecontabilidade.services.cliente;
 
 import java.util.List;
 
+import org.springframework.validation.BindingResult;
+
 import br.com.aciolecontabilidade.exceptions.ClienteEncontradoException;
 import br.com.aciolecontabilidade.models.Cliente;
 import br.com.aciolecontabilidade.models.dto.ClienteDTOOut;
@@ -17,5 +19,7 @@ public interface ClienteService {
 	Cliente buscarPorId(Long id);
 	
 	DetalharClienteDTO buscarPorIdPraDetalhe(Long id);
+	
+	boolean validarFormClienteIR(BindingResult result, ClienteIRCadastroDTO dto);
 
 }

@@ -6,9 +6,21 @@ $(document).ready(function() {
 	$('#valorServico').mask('###.##0,00', { reverse: true });
 	$("#cpfIR").mask("000.000.000-00");
 	$("#cnpjIR").mask("00.000.000/0000-00");
+	
+	//pegando elemnto campo Titulo Eleitor
+	let element = document.getElementById("tituloIR");
 
-	console.log('tela carregada: ', document.getElementById("tipoIR").value)
-
+	//verificando se o campo é diferente de vazio para aplicar as validações visuais
+	if (element.value !== "") {
+		$("#divShowErroFieldTitulo").show();
+		if (element.classList.contains("is-invalid"))
+			element.classList.add("is-invalid");
+	} else {
+		$("#divShowErroFieldTitulo").hide();
+		element.classList.remove("is-invalid");
+	}
+	
+	//validando o campo correto a ser exibido de acordo com o tipo de cliente retornado
 	switch (document.getElementById("tipoIR").value) {
 		case 'PJ':
 			console.log('chegou pj')
@@ -29,6 +41,8 @@ $(document).ready(function() {
 
 });
 
+
+//validando o campo correto a ser exibido de acordo com o tipo de cliente selecionado
 function mudarNomeCampoCpfCnpj() {
 	document.getElementById("cpfIR").value = "";
 	document.getElementById("cnpjIR").value = "";

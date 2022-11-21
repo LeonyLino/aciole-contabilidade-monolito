@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
+import org.hibernate.validator.constraints.br.TituloEleitoral;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import br.com.aciolecontabilidade.enums.TipoClienteEnum;
@@ -20,29 +21,26 @@ import lombok.Setter;
 public class ClienteIRCadastroDTO {
 
 	private Long id;
-	@NotEmpty
-	@Size(min = 3, max = 100)
+	@NotEmpty(message = "*Campo Obrigatório!")
+	@Size(min = 3, max = 100, message = "*Deve ter o tamanho entre 3 e 100 caracteres.")
 	private String nomeIR;
-	@CPF
+	@CPF(message = "CPF Inválido!")
 	private String cpfIR;
-	@CNPJ
+	@CNPJ(message = "CNPJ Inválido!")
 	private String cnpjIR;
-	@NotEmpty
-	@Size(min = 3, max = 15)
+	@Size(min = 3, max = 15, message = "Deve ter o tamanho entre 3 e 15 caracteres.")
 	private String rgIR;
-	@NotEmpty
-	@Size(min = 3, max = 12)
+	@TituloEleitoral(message = "Titulo Eleitoral Inválido!")
 	private String tituloIR;
-	@NotEmpty
-	@Size(max = 16)
+	@NotEmpty(message = "*Campo Obrigatório!")
+	@Size(min = 16, max = 16, message = "*Número tem que ser formado por: (DDD) '9' 0000-0000")
 	private String numContatoIR;
 	@Email
 	private String emailIR;
-	@NotNull
+	@NotNull(message = "Campo Obrigatório!")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dtNascimentoIR;
-	@NotEmpty
-	@NotNull
+	@NotEmpty(message = "Campo Obrigatório!")
 	private String tipoIR;
 	
 	public TipoClienteEnum getTipoCliente() {

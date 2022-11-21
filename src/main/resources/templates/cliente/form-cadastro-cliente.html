@@ -46,7 +46,7 @@
 				<div class="form-group">
 					<label for="tituloIR">Título de Eleitor</label>
 					<input th:field="*{tituloIR}" th:errorClass="is-invalid" class="form-control" />
-					<div class="invalid-feedback" th:errors="*{tituloIR}"></div>
+					<div id="divShowErroFieldTitulo" class="invalid-feedback" th:errors="*{tituloIR}"></div>
 				</div>
 
 				<div class="form-group">
