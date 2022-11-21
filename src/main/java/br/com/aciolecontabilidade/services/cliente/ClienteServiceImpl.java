@@ -39,9 +39,10 @@ public class ClienteServiceImpl implements ClienteService {
 		dto.setNumContatoIR(StringUtil.removerMascara(dto.getNumContatoIR()));
 
 		this.validarDadosExistentes(dto, documento);
-		cRepository.save(new Cliente(null, null, dto.getNomeIR(), documento, dto.getRgIR(), dto.getTituloIR(),
-				dto.getNumContatoIR(), dto.getEmailIR(), dto.getDtNascimentoIR(), null, FlagFixoEnum.NAO.getChave(),
-				dto.getTipoCliente(), null));
+		cRepository.save(new Cliente(null, null, dto.getNomeIR(), documento, dto.getRgIR().isBlank() ? null : dto.getRgIR(),
+				dto.getTituloIR().isBlank() ? null : dto.getTituloIR(), dto.getNumContatoIR(),
+				dto.getEmailIR().isBlank() ? null : dto.getEmailIR(), dto.getDtNascimentoIR(), null,
+				FlagFixoEnum.NAO.getChave(), dto.getTipoCliente(), null));
 
 	}
 

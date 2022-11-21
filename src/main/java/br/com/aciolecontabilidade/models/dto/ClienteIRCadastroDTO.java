@@ -28,7 +28,7 @@ public class ClienteIRCadastroDTO {
 	private String cpfIR;
 	@CNPJ(message = "CNPJ Inválido!")
 	private String cnpjIR;
-	@Size(min = 3, max = 15, message = "Deve ter o tamanho entre 3 e 15 caracteres.")
+	@Size(max = 15, message = "Tamanho máximo de 15 caracteres.")
 	private String rgIR;
 	@TituloEleitoral(message = "Titulo Eleitoral Inválido!")
 	private String tituloIR;
