@@ -16,24 +16,22 @@
 			<thead>
 				<tr>
 					<th>Nome</th>
-					<th>CPF</th>
-					<th>RG</th>
-					<th>Titulo Eleitor</th>
+					<th>CPF/CNPJ</th>
 					<th>Telefone</th>
 					<th>E-mail</th>
-					<th>Data Nascimento</th>
 					<th>Ações</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="cliente : ${clientes}">
 					<th th:text="${cliente.nomeCliente}"></th>
-					<th th:text="${cliente.cpfCliente}"></th>
-					<th th:text="${cliente.rgCliente}"></th>
-					<th th:text="${cliente.tituloEleitorCliente}"></th>
-					<th th:text="${cliente.numContato}"></th>
+					<th class="colunmCpf" th:text="${cliente.cpfCnpjCliente}" th:if="${cliente.tipo.toString eq 'PF'}">
+					</th>
+					<th class="colunmCnpj" th:text="${cliente.cpfCnpjCliente}" th:if="${cliente.tipo.toString eq 'PJ'}">
+					</th>
+					<th class="colunmNumContato" th:text="${cliente.numContato}"></th>
+					<!--<th th:text="${#temporals.format(cliente.dtNascimento, 'dd/MM/yyyy')}"></th>-->
 					<th th:text="${cliente.email}"></th>
-					<th th:text="${#temporals.format(cliente.dtNascimento, 'dd/MM/yyyy')}"></th>
 					<th>
 						<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 							<div class="btn-group" role="group">
@@ -52,7 +50,6 @@
 
 			</tbody>
 		</table>
-
 </body>
 
 </html>

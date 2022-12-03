@@ -77,7 +77,7 @@ public class ClienteController {
 	}
 
 	@GetMapping("/detalhar/{id}")
-	public ModelAndView listar(Principal principal, @PathVariable String id) {
+	public ModelAndView detalhar(Principal principal, @PathVariable String id) {
 		ModelAndView mv = new ModelAndView("cliente/detalhe");
 		mv.addObject("itemMenu", ITEM_MENU_CLIENTE);
 		mv.addObject("nomeUser", principal.getName());

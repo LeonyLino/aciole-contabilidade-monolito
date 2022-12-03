@@ -17,16 +17,11 @@
 			<dt class="col-sm-3">Nome</dt>
 			<dd class="col-sm-9" th:text="${cliente.nome}"></dd>
 
-			<dt class="col-sm-3" th:if="${cliente.nomeFantasia != ''}">Nome Fantasia</dt>
-			<dd class="col-sm-9" th:if="${cliente.nomeFantasia != ''}" th:text="${cliente.nomeFantasia}">
-			</dd>
+			<dt class="col-sm-3" th:if="${cliente.tipo.toString eq 'PF'}">CPF</dt>
+			<dd class="col-sm-9 colunmCpf" th:text="${cliente.cpfCnpj}" th:if="${cliente.tipo.toString eq 'PF'}"></dd>
 
-			<dt class="col-sm-3">CPF</dt>
-			<dd class="col-sm-9" th:text="${cliente.cpf}"></dd>
-
-			<dt class="col-sm-3" th:if="${cliente.cnpj != null} or ${cliente.cnpj != ''} ">CNPJ</dt>
-			<dd class="col-sm-9" th:text="${cliente.cnpj}" th:if="${cliente.cnpj != null}  or ${cliente.cnpj != ''}">
-			</dd>
+			<dt class="col-sm-3" th:if="${cliente.tipo.toString eq 'PJ'}">CNPJ</dt>
+			<dd class="col-sm-9 colunmCnpj" th:text="${cliente.cpfCnpj}" th:if="${cliente.tipo.toString eq 'PJ'}"></dd>
 
 			<dt class="col-sm-3">RG</dt>
 			<dd class="col-sm-9" th:text="${cliente.rg}"></dd>
@@ -38,7 +33,7 @@
 			<dd class="col-sm-9">
 				<dl class="row">
 					<dt class="col-sm-4">Telefone</dt>
-					<dd class="col-sm-8" th:text="${cliente.numContato}"></dd>
+					<dd class="col-sm-8 colunmNumContato" th:text="${cliente.numContato}"></dd>
 
 					<dt class="col-sm-4">E-mail</dt>
 					<dd class="col-sm-8" th:text="${cliente.email}"></dd>
@@ -48,16 +43,16 @@
 			<dt class="col-sm-3">Data de nascimento</dt>
 			<dd class="col-sm-9" th:text="${#temporals.format(cliente.dtNascimento, 'dd/MM/yyyy')}"></dd>
 
-			<dt class="col-sm-3">Senha Gov</dt>
-			<dd class="col-sm-9" th:text="${cliente.senhaGov}"></dd>
-
 			<dt class="col-sm-3" th:if="${cliente.servicos != null and !cliente.servicos.empty}">Serviços</dt>
-			<dd class="col-sm-9" th:if="${cliente.servicos != null and !cliente.servicos.empty}">
-				<dl class="row" th:each="servico : ${cliente.servicos}">
-					<dt class="col-sm-4" th:text="${servico.tipo.descricao}"></dt>
+			<dd class="col-sm-9 card" th:if="${cliente.servicos != null and !cliente.servicos.empty}">
+				<dl class="row card-body" th:each="servico : ${cliente.servicos}">
+					<dt class="col-sm-4" th:text="'Referente ao Ano ' + ${servico.anoReferencia}"></dt>
 					<dl class="row">
 						<dd class="col-sm-3" th:text="${#temporals.format(servico.data, 'dd/MM/yyyy')}"></dd>
 						<dd class="col-sm-8" th:text="'R$ ' + ${servico.valor}"></dd>
+						<dt th:if="${servico.observacoes ne ''}" class="col-sm-2">Observações:</dt>
+						<dd th:if="${servico.observacoes ne ''}" class="col-sm-5" th:text="${servico.observacoes}"></dd>
+
 					</dl>
 				</dl>
 			</dd>
@@ -65,14 +60,13 @@
 
 		</dl>
 
-		<div class="form-check form-switch">
+		<!--<div class="form-check form-switch">
 			<input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" th:checked="${cliente.ativo}"
 				disabled>
 			<label th:text="${cliente.ativo} ? Ativo : Desativado" class="form-check-label"
 				for="flexSwitchCheckChecked"></label>
 
-		</div>
-
+		</div>-->
 </body>
 
 </html>

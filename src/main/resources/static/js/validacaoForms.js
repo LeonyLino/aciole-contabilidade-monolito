@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	/* mask da tela cadastrar clientes IR*/
 	$("#dtNascimentoIR").mask("00/00/0000");
 	$("#numContatoIR").mask("(00) 0 0000-0000");
 	$("#rgIR").mask("000000000000000");
@@ -7,6 +8,11 @@ $(document).ready(function() {
 	$("#cpfIR").mask("000.000.000-00");
 	$("#cnpjIR").mask("00.000.000/0000-00");
 	
+	/* mask da tela listar clientes IR*/
+	$(".colunmCpf").mask("000.000.000-00");
+	$(".colunmNumContato").mask("(00) 0 0000-0000");
+	$(".colunmCnpj").mask("00.000.000/0000-00");
+
 	//pegando elemnto campo Titulo Eleitor
 	let element = document.getElementById("tituloIR");
 
@@ -19,7 +25,7 @@ $(document).ready(function() {
 		$("#divShowErroFieldTitulo").hide();
 		element.classList.remove("is-invalid");
 	}
-	
+
 	//validando o campo correto a ser exibido de acordo com o tipo de cliente retornado
 	switch (document.getElementById("tipoIR").value) {
 		case 'PJ':
@@ -40,6 +46,7 @@ $(document).ready(function() {
 	}
 
 });
+
 
 
 //validando o campo correto a ser exibido de acordo com o tipo de cliente selecionado

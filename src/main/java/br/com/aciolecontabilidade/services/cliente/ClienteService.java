@@ -8,7 +8,7 @@ import br.com.aciolecontabilidade.exceptions.ClienteEncontradoException;
 import br.com.aciolecontabilidade.models.Cliente;
 import br.com.aciolecontabilidade.models.dto.ClienteDTOOut;
 import br.com.aciolecontabilidade.models.dto.ClienteIRCadastroDTO;
-import br.com.aciolecontabilidade.models.dto.DetalharClienteDTO;
+import br.com.aciolecontabilidade.models.dto.DetalharClienteIRDTO;
 
 public interface ClienteService {
 
@@ -18,7 +18,7 @@ public interface ClienteService {
 	
 	Cliente buscarPorId(Long id);
 	
-	DetalharClienteDTO buscarPorIdPraDetalhe(Long id);
+	DetalharClienteIRDTO buscarPorIdPraDetalhe(Long id);
 	
 	boolean validarFormClienteIR(BindingResult result, ClienteIRCadastroDTO dto);
 

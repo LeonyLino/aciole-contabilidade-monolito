@@ -15,7 +15,7 @@ import br.com.aciolecontabilidade.exceptions.EntidadeNaoEncontradaException;
 import br.com.aciolecontabilidade.models.Cliente;
 import br.com.aciolecontabilidade.models.dto.ClienteDTOOut;
 import br.com.aciolecontabilidade.models.dto.ClienteIRCadastroDTO;
-import br.com.aciolecontabilidade.models.dto.DetalharClienteDTO;
+import br.com.aciolecontabilidade.models.dto.DetalharClienteIRDTO;
 import br.com.aciolecontabilidade.models.dto.converter.ClienteDTOConverter;
 import br.com.aciolecontabilidade.models.dto.converter.DetalharClienteDTOConverter;
 import br.com.aciolecontabilidade.repository.ClienteRepository;
@@ -76,7 +76,7 @@ public class ClienteServiceImpl implements ClienteService {
 	}
 
 	@Override
-	public DetalharClienteDTO buscarPorIdPraDetalhe(Long id) {
+	public DetalharClienteIRDTO buscarPorIdPraDetalhe(Long id) {
 		return dcDTOConverter.convert(this.buscarPorId(id));
 	}
 
