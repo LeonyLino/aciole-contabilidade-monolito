@@ -36,7 +36,7 @@ public class ServicoController {
 	@GetMapping("form/{idCliente}")
 	public ModelAndView cadastrar(@PathVariable String idCliente, CadastrarServicoDTO dto, BindingResult resul,
 			Principal principal) {
-		ModelAndView mv = new ModelAndView("cliente/servico/form-cadastro");
+		ModelAndView mv = new ModelAndView("cliente/servico/form-cadastro-servico");
 		mv.addObject("itemMenu", "cliente");
 		mv.addObject("nomeUser", principal.getName());
 		mv.addObject("tiposEnum", TipoServicoEnum.values());

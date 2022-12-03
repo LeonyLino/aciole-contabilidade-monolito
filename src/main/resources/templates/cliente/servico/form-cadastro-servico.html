@@ -10,9 +10,10 @@
 			</div>
 			<form th:object="${cadastrarServicoDTO}" class="card-body" th:action="@{/servico}" method="POST">
 
-				<div class="form-group">
+				<!--<div class="form-group">
 					<label for="tipo">Tipo Serviço</label>
-					<select th:field="*{tipo}" id="tipoServico" class="form-select" aria-label=".form-select-sm example">
+					<select th:field="*{tipo}" id="tipoServico" class="form-select"
+						aria-label=".form-select-sm example">
 						<option value="">...</option>
 						<option th:field="*{tipo}" th:each="tipo : ${tiposEnum}" th:value="${tipo.id}"
 							th:text="${tipo.descricao}">
@@ -20,12 +21,24 @@
 					</select>
 					<div class="invalid-feedback" th:errors="*{tipo}">
 					</div>
-				</div>
+				</div>-->
 
 				<div class="form-group">
 					<label for="valor">Valor R$</label>
 					<input th:field="*{valor}" id="valorServico" th:errorClass="is-invalid" class="form-control" />
 					<div class="invalid-feedback" th:errors="*{valor}"></div>
+				</div>
+
+				<div class="form-group">
+					<label for="anoReferencia">Ano Referência</label>
+					<input th:field="*{anoReferencia}" id="valorServico" th:errorClass="is-invalid" class="form-control"
+						maxlength="4" minlength="4" />
+					<div class="invalid-feedback" th:errors="*{anoReferencia}"></div>
+				</div>
+
+				<div class="mb-3">
+					<label for="observacoes" class="form-label">Observerções</label>
+					<textarea class="form-control" th:field="*{observacoes}" rows="3" placeholder="Opional" maxlength="200"></textarea>
 				</div>
 
 				<button class="btn btn-primary mt-3" type="submit">Cadastrar</button>

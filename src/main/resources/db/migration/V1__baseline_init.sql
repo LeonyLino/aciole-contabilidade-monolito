@@ -21,21 +21,13 @@ CREATE TABLE tb_acesso_portal (
 	FOREIGN KEY (fk_cliente) REFERENCES tb_cliente (id_cliente)
 );
 
-CREATE TABLE tb_tipo_servico (
-	id_tipo SERIAL PRIMARY KEY,
-	ds_tipo VARCHAR(50) NOT NULL
-);
-INSERT INTO tb_tipo_servico VALUES (DEFAULT, 'Declaração IRPF');
-INSERT INTO tb_tipo_servico VALUES (DEFAULT, 'Declaração IRPJ');
-
 CREATE TABLE tb_servico (
 	id_servico SERIAL 		PRIMARY KEY,
 	valor_servico 			DECIMAL(10,2) NOT NULL,
-	ano_referencia_servico 	date NOT NULL,
+	ano_referencia_servico 	VARCHAR(4) NOT NULL,
 	data_servico 			date NOT NULL,
-	fk_tipo_servico			INTEGER NOT NULL,
+	observacoes_servico		VARCHAR(200),
 	fk_cliente 				INTEGER NOT NULL,
-	FOREIGN KEY (fk_tipo_servico) REFERENCES tb_tipo_servico (id_tipo),
 	FOREIGN KEY (fk_cliente) REFERENCES tb_cliente (id_cliente)
 );
 

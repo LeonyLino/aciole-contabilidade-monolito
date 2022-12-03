@@ -1,6 +1,7 @@
 package br.com.aciolecontabilidade.services.servico;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import javax.transaction.Transactional;
 
@@ -21,8 +22,9 @@ public class ServicoServiceImpl implements ServicoService {
 	@Override
 	@Transactional
 	public void salvar(CadastrarServicoDTO dto) {
-		sRepository.save(new Servico(dto.getTipoServico(),
-				new BigDecimal(Double.valueOf(StringUtil.substituirPorPonto(dto.getValor()))), dto.getCliente()));
+		sRepository
+				.save(new Servico(null, new BigDecimal(Double.valueOf(StringUtil.substituirPorPonto(dto.getValor()))),
+						dto.getAnoReferencia(), LocalDate.now(), dto.getObservacoes(), dto.getCliente()));
 	}
 
 }
