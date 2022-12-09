@@ -15,7 +15,7 @@ CREATE TABLE tb_cliente (
 CREATE TABLE tb_acesso_portal (
 	id_acesso 		SERIAL PRIMARY KEY,
 	ds_acesso 		VARCHAR(30) NOT NULL,
-	cod_acesso 		VARCHAR(15) NOT NULL,
+	cod_acesso 		VARCHAR(15),
 	senha_acesso	VARCHAR(15) NOT NULL,
 	fk_cliente 		INTEGER NOT NULL,
 	FOREIGN KEY (fk_cliente) REFERENCES tb_cliente (id_cliente)
