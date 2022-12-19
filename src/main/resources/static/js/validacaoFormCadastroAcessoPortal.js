@@ -6,10 +6,9 @@ function hideOrShowInputCodigoAcesso() {
 
 	switch (document.getElementById("descricao").value) {
 		case 'GOV':
-			$("#divInputCodAcesso").hide();
-			break;
 		case 'PREFEITURA':
 			$("#divInputCodAcesso").hide();
+			document.getElementById('codigoAcesso').value = "";
 			break;
 		default:
 			$("#divInputCodAcesso").show();

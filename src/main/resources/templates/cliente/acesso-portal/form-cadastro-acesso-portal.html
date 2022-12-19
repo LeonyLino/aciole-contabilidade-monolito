@@ -31,7 +31,7 @@
 
 				<div class="form-group">
 					<label for="senha">Senha</label>
-					<input th:field="*{senha}" th:errorClass="is-invalid" class="form-control" />
+					<input th:field="*{senha}" th:errorClass="is-invalid" class="form-control" maxlength="15" />
 					<div class="invalid-feedback" th:errors="*{senha}"></div>
 				</div>
 

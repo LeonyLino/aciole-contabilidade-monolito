@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.aciolecontabilidade.enums.PortalEnum;
 import br.com.aciolecontabilidade.models.Cliente;
 import br.com.aciolecontabilidade.models.dto.AcessoPortalCadastroDTO;
+import br.com.aciolecontabilidade.services.acessoportal.AcessoPortalService;
 import br.com.aciolecontabilidade.services.cliente.ClienteService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ import lombok.Setter;
 public class AcessoPortalController {
 
 	private final ClienteService cService;
+	private final AcessoPortalService apService;
 	@Getter
 	@Setter
 	private Cliente cliente;
@@ -42,7 +44,8 @@ public class AcessoPortalController {
 	}
 
 	@PostMapping
-	public ModelAndView salvar(@Valid AcessoPortalCadastroDTO dto, BindingResult result, Model model, Principal principal) {
+	public ModelAndView salvar(@Valid AcessoPortalCadastroDTO dto, BindingResult result, Model model,
+			Principal principal) {
 		dto.setCliente(cliente);
 		ModelAndView mv = new ModelAndView("redirect:/cliente/detalhar/" + dto.getCliente().getId());
 
@@ -50,6 +53,8 @@ public class AcessoPortalController {
 			if (result.hasErrors()) {
 				return this.formCadastrar(cliente.getId().toString(), dto, result, principal);
 			}
+
+			apService.salvar(dto);
 		} catch (Exception e) {
 			e.getStackTrace();
 		}

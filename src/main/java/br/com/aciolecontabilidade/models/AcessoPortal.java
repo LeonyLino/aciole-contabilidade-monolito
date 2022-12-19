@@ -13,6 +13,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.aciolecontabilidade.enums.PortalEnum;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,16 +23,17 @@ import lombok.Setter;
 @Entity
 @Table(name = "TB_ACESSO_PORTAL")
 @NoArgsConstructor
-@SequenceGenerator(name = "TB_ACESSO_PORTAL_ID_CLIENTE_SEQ", sequenceName = "TB_ACESSO_PORTAL_ID_CLIENTE_SEQ", initialValue = 1, allocationSize = 1)
+@AllArgsConstructor
+@SequenceGenerator(name = "TB_ACESSO_PORTAL_ID_ACESSO_SEQ", sequenceName = "TB_ACESSO_PORTAL_ID_ACESSO_SEQ", initialValue = 1, allocationSize = 1)
 public class AcessoPortal implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "TB_ACESSO_PORTAL_ID_CLIENTE_SEQ")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "TB_ACESSO_PORTAL_ID_ACESSO_SEQ")
 	@Column(name = "ID_ACESSO", nullable = false)
 	private Long id;
-	
+
 	@Column(name = "DS_ACESSO", nullable = false)
 	private PortalEnum descricao;
 
@@ -40,7 +42,7 @@ public class AcessoPortal implements Serializable {
 
 	@Column(name = "SENHA_ACESSO", nullable = false)
 	private String senha;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "FK_CLIENTE", nullable = false)
 	private Cliente cliente;
