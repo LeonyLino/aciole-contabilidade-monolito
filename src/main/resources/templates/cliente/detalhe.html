@@ -8,10 +8,20 @@
 			<div class="container-fluid">
 
 			</div>
-			<span class="mb-3 mr-2">
-				<a type="button" class="btn btn-outline-dark" th:href="@{'/servico/form/' + ${cliente.id} }">Cadastrar
-					Serviço</a>
-			</span>
+			<div class="dropdown">
+				<a class="btn dropdown-toggle btn-outline-dark" href="#" role="button" id="dropdownMenuLink"
+					data-bs-toggle="dropdown" aria-expanded="false">
+					Ações
+				</a>
+
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					<li><a class="dropdown-item" type="button" th:href="@{'/servico/form/' + ${cliente.id} }">Cadastrar
+							Serviço</a></li>
+					<li><a class="dropdown-item" type="button"
+							th:href="@{'/acessoPortal/form/' + ${cliente.id} }">Cadastrar
+							Acessos Portais</a></li>
+				</ul>
+			</div>
 		</div>
 		<dl class="row">
 			<dt class="col-sm-3">Nome</dt>
@@ -53,6 +63,22 @@
 						<dt th:if="${servico.observacoes ne ''}" class="col-sm-2">Observações:</dt>
 						<dd th:if="${servico.observacoes ne ''}" class="col-sm-5" th:text="${servico.observacoes}"></dd>
 
+					</dl>
+				</dl>
+			</dd>
+
+			<dt class="col-sm-3" th:if="${cliente.acessos != null and !cliente.acessos.empty}">Credenciais de Acesso a
+				Portais</dt>
+			<dd class="col-sm-9 card" th:if="${cliente.acessos != null and !cliente.acessos.empty}">
+				<dl class="row card-body" th:each="acesso : ${cliente.acessos}">
+					<dt class="col-sm-2" th:text="${acesso.descricao}"></dt>
+					<a type="button" class="col-sm-1" th:href="@{'/acessoPortal/editar/' + ${acesso.id} }"><i class="bi bi-pen"></i></a>
+					<dl class="row">
+						<dd class="col-sm-3" th:text="'Código: ' + ${acesso.codigoAcesso}"></dd>
+						<dd class="col-sm-3" th:text="'Senha: ' + ${acesso.senha}"></dd>
+						<!-- <a type="button" class="col-sm-2">
+							<i class="bi bi-eye-slash-fill"></i> fazer chave de visualizar ou esconder senha-->
+						</a>
 					</dl>
 				</dl>
 			</dd>

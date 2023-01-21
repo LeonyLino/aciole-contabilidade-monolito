@@ -10,19 +10,6 @@
 			</div>
 			<form th:object="${cadastrarServicoDTO}" class="card-body" th:action="@{/servico}" method="POST">
 
-				<!--<div class="form-group">
-					<label for="tipo">Tipo Serviço</label>
-					<select th:field="*{tipo}" id="tipoServico" class="form-select"
-						aria-label=".form-select-sm example">
-						<option value="">...</option>
-						<option th:field="*{tipo}" th:each="tipo : ${tiposEnum}" th:value="${tipo.id}"
-							th:text="${tipo.descricao}">
-						</option>
-					</select>
-					<div class="invalid-feedback" th:errors="*{tipo}">
-					</div>
-				</div>-->
-
 				<div class="form-group">
 					<label for="valor">Valor R$</label>
 					<input th:field="*{valor}" id="valorServico" th:errorClass="is-invalid" class="form-control" />

@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public enum PortalEnum {
 
-	ECAC, GOV, PREFEITURA, SIMPLES_NACIONAL, E_SOCIAL
+	ECAC, GOV/*apenas senha*/, PREFEITURA/*apenas senha*/, SIMPLES_NACIONAL, E_SOCIAL
 	
 }

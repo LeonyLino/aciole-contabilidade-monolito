@@ -11,9 +11,10 @@ public class DetalharClienteDTOConverter implements Converter<Cliente, DetalharC
 
 	@Override
 	public DetalharClienteIRDTO convert(Cliente cliente) {
-		return DetalharClienteIRDTO.builder().id(cliente.getId()).nome(cliente.getNome()).cpfCnpj(cliente.getCpfCnpj()).rg(cliente.getRg())
-				.tituloEleitor(cliente.getTituloEleitor()).numContato(cliente.getNumContato()).email(cliente.getEmail())
-				.dtNascimento(cliente.getDtNascimento()).tipo(cliente.getTipo()).servicos(cliente.getServicos()).build();
+		return DetalharClienteIRDTO.builder().id(cliente.getId()).nome(cliente.getNome()).cpfCnpj(cliente.getCpfCnpj())
+				.rg(cliente.getRg()).tituloEleitor(cliente.getTituloEleitor()).numContato(cliente.getNumContato())
+				.email(cliente.getEmail()).dtNascimento(cliente.getDtNascimento()).tipo(cliente.getTipo())
+				.servicos(cliente.getServicos()).acessos(cliente.getSenhas()).build();
 	}
 
 }
