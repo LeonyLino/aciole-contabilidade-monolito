@@ -38,15 +38,15 @@ public class AcessoPortalController {
 			Principal principal) {
 		ModelAndView mv = new ModelAndView("cliente/acesso-portal/form-cadastro-acesso-portal");
 		mv.addObject("tiposEnum", PortalEnum.values());
-		this.cliente = cService.buscarPorId(Long.valueOf(idCliente));
-		mv.addObject("acessoPortalCliente", this.cliente);
+		setCliente(cService.buscarPorId(Long.valueOf(idCliente)));
+		mv.addObject("acessoPortalCliente", getCliente());
 		return mv;
 	}
 
 	@PostMapping
 	public ModelAndView salvar(@Valid AcessoPortalCadastroDTO dto, BindingResult result, Model model,
 			Principal principal) {
-		dto.setCliente(cliente);
+		dto.setCliente(getCliente());
 		ModelAndView mv = new ModelAndView("redirect:/cliente/detalhar/" + dto.getCliente().getId());
 
 		try {
@@ -60,6 +60,16 @@ public class AcessoPortalController {
 		}
 
 		return mv;
-
+	}
+	
+	@GetMapping("editar/{id}")
+	public ModelAndView editar(@PathVariable Long id) {
+		ModelAndView mv = new ModelAndView("cliente/acesso-portal/form-cadastro-acesso-portal");
+		AcessoPortalCadastroDTO dto = apService.buscarPorId(id);
+		setCliente(dto.getCliente());
+		mv.addObject("acessoPortalCadastroDTO", dto);
+		mv.addObject("tiposEnum", PortalEnum.values());
+		mv.addObject("acessoPortalCliente", getCliente());
+		return mv;
 	}
 }

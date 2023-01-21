@@ -5,4 +5,6 @@ import br.com.aciolecontabilidade.models.dto.AcessoPortalCadastroDTO;
 public interface AcessoPortalService {
 
 	void salvar(AcessoPortalCadastroDTO dto);
+	
+	AcessoPortalCadastroDTO buscarPorId(Long id);
 }

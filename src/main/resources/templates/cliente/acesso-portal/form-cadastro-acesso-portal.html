@@ -10,13 +10,14 @@
 			</div>
 			<form th:object="${acessoPortalCadastroDTO}" class="card-body" th:action="@{/acessoPortal}" method="POST">
 
+				<input th:field="*{id}" type="hidden" />
 				<div class="form-group">
-					<label for="descricao">Tipo Serviço</label>
+					<label for="descricao">Portal</label>
 					<select th:field="*{descricao}" class="form-select" aria-label=".form-select-sm example"
 						th:errorClass="is-invalid" onchange="hideOrShowInputCodigoAcesso()">
 						<option value="">...</option>
 						<option th:field="*{descricao}" th:each="tipo : ${tiposEnum}" th:value="${tipo}"
-							th:text="${tipo.toString}">
+							th:text="${tipo.toString}" th:selected="${tipo.toString} eq ${acessoPortalCadastroDTO.descricao}">
 						</option>
 					</select>
 					<div class="invalid-feedback" th:errors="*{descricao}">
