@@ -21,7 +21,7 @@ public class AcessoPortalServiceImpl implements AcessoPortalService {
 		apRepository.save(new AcessoPortal(dto.getId(), dto.getDescricaoPortal(), dto.getCodigoAcesso(), dto.getSenha(),
 				dto.getCliente()));
 	}
-	
+
 	private AcessoPortal buscarPorIdPraEditar(Long id) {
 		return apRepository.findById(id).orElseThrow(EntidadeNaoEncontradaException::new);
 	}
@@ -31,5 +31,9 @@ public class AcessoPortalServiceImpl implements AcessoPortalService {
 		return apcDTOConverter.convert(this.buscarPorIdPraEditar(id));
 	}
 
+	@Override
+	public void remover(Long id) {
+		apRepository.delete(this.buscarPorIdPraEditar(id));
+	}
 
 }

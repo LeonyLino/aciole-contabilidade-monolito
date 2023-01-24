@@ -2,7 +2,7 @@ $(document).ready(function() {
 	$("#codigoAcesso").mask("000000000000");
 
 	let elementDescricao = document.getElementById("descricao");
-	if (elementDescricao.value !== null) {
+	if (elementDescricao !== null && elementDescricao.value !== '') {
 		switch (elementDescricao.value) {
 			case 'GOV':
 			case 'PREFEITURA':
