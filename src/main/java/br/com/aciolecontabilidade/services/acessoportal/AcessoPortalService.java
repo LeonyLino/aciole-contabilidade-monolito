@@ -7,4 +7,6 @@ public interface AcessoPortalService {
 	void salvar(AcessoPortalCadastroDTO dto);
 	
 	AcessoPortalCadastroDTO buscarPorId(Long id);
+	
+	void remover(Long id);
 }

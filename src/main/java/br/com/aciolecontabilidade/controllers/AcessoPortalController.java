@@ -4,6 +4,7 @@ import java.security.Principal;
 
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.aciolecontabilidade.enums.PortalEnum;
@@ -61,7 +63,7 @@ public class AcessoPortalController {
 
 		return mv;
 	}
-	
+
 	@GetMapping("editar/{id}")
 	public ModelAndView editar(@PathVariable Long id) {
 		ModelAndView mv = new ModelAndView("cliente/acesso-portal/form-cadastro-acesso-portal");
@@ -72,4 +74,11 @@ public class AcessoPortalController {
 		mv.addObject("acessoPortalCliente", getCliente());
 		return mv;
 	}
+
+	@GetMapping("remover/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public void remover(@PathVariable Long id) {
+		apService.remover(id);
+	}
+
 }
