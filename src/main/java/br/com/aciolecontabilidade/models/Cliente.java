@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +14,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import br.com.aciolecontabilidade.enums.FlagExcluidoEnum;
 import br.com.aciolecontabilidade.enums.TipoClienteEnum;
+import br.com.aciolecontabilidade.enums.converter.FlagExcluidoEnumConverter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -72,16 +75,8 @@ public class Cliente implements Serializable {
 	@OneToMany(mappedBy = "cliente")
 	private List<Servico> servicos;
 
-//	public Cliente(String nome, String cpfString, String rg, String tituloEleitor, String numContato, String email,
-//			LocalDate dtNascimento, TipoClienteEnum tipo) {
-//		nome = this.nome;
-//		cpfString = this.cpfCnpj;
-//		rg = this.rg;
-//		tituloEleitor = this.tituloEleitor;
-//		numContato = this.numContato;
-//		email = this.email;
-//		dtNascimento = this.dtNascimento;
-//		tipo = this.tipo;
-//	}
+	@Column(name = "FL_EXCLUIDO_CLIENTE", nullable = false, length = 1)
+	@Convert(converter = FlagExcluidoEnumConverter.class)
+	private FlagExcluidoEnum flagExcluido;
 
 }

@@ -4,6 +4,7 @@ import java.security.Principal;
 
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.aciolecontabilidade.enums.TipoClienteEnum;
@@ -83,6 +85,13 @@ public class ClienteController {
 		mv.addObject("nomeUser", principal.getName());
 		mv.addObject(ITEM_MENU_CLIENTE, cService.buscarPorIdPraDetalhe(Long.valueOf(id)));
 		return mv;
+	}
+	
+	@GetMapping("/remover/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public void remover(Principal principal, @PathVariable String id) {
+ 		cService.removerPorId(Long.valueOf(id));
+ 		this.listar(principal, null);
 	}
 
 }
