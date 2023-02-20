@@ -43,7 +43,7 @@ public class ClienteServiceImpl implements ClienteService {
 		cRepository.save(new Cliente(null, null, dto.getNomeIR(), documento,
 				dto.getRgIR().isBlank() ? null : dto.getRgIR(), dto.getTituloIR().isBlank() ? null : dto.getTituloIR(),
 				dto.getNumContatoIR(), dto.getEmailIR().isBlank() ? null : dto.getEmailIR(), dto.getDtNascimentoIR(),
-				null, FlagFixoEnum.NAO.getChave(), dto.getTipoCliente(), null, FlagExcluidoEnum.SIM));
+				null, FlagFixoEnum.NAO.getChave(), dto.getTipoCliente(), null, FlagExcluidoEnum.NAO));
 
 	}
 
@@ -68,7 +68,7 @@ public class ClienteServiceImpl implements ClienteService {
 	public List<ClienteDTOOut> listar() {
 //		Sort sort = Sort.by("nome");
 //		PageRequest paginacao = PageRequest.of(0, 10, sort);
-		return cRepository.findAllByFlagExcluidoIs(FlagExcluidoEnum.SIM).stream().map(cDTOConverter::convert)
+		return cRepository.findAllByFlagExcluidoIs(FlagExcluidoEnum.NAO).stream().map(cDTOConverter::convert)
 				.collect(Collectors.toList());
 
 	}
@@ -96,7 +96,7 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public void removerPorId(Long id) {
 		Cliente cliente = this.buscarPorId(id);
-		cliente.setFlagExcluido(FlagExcluidoEnum.NAO);
+		cliente.setFlagExcluido(FlagExcluidoEnum.SIM);
 		cRepository.save(cliente);
 	}
 

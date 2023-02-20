@@ -22,18 +22,18 @@ public class AcessoPortalServiceImpl implements AcessoPortalService {
 				dto.getCliente()));
 	}
 
-	private AcessoPortal buscarPorIdPraEditar(Long id) {
+	private AcessoPortal buscarPorId(Long id) {
 		return apRepository.findById(id).orElseThrow(EntidadeNaoEncontradaException::new);
 	}
 
 	@Override
-	public AcessoPortalCadastroDTO buscarPorId(Long id) {
-		return apcDTOConverter.convert(this.buscarPorIdPraEditar(id));
+	public AcessoPortalCadastroDTO retornaDtorPorId(Long id) {
+		return apcDTOConverter.convert(this.buscarPorId(id));
 	}
 
 	@Override
 	public void remover(Long id) {
-		apRepository.delete(this.buscarPorIdPraEditar(id));
+		apRepository.delete(this.buscarPorId(id));
 	}
 
 }

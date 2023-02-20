@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.aciolecontabilidade.enums.PortalEnum;
 import br.com.aciolecontabilidade.enums.TipoServicoEnum;
 import br.com.aciolecontabilidade.models.Cliente;
 import br.com.aciolecontabilidade.models.dto.CadastrarServicoDTO;
@@ -49,7 +50,7 @@ public class ServicoController {
 	public ModelAndView salvar(@Valid CadastrarServicoDTO dto, BindingResult result, Model model, Principal principal) {
 		dto.setCliente(cliente);
 		ModelAndView mv = new ModelAndView("redirect:/cliente/detalhar/" + dto.getCliente().getId());
-		
+
 		try {
 			if (result.hasErrors()) {
 				return this.cadastrar(cliente.getId().toString(), dto, result, principal);
@@ -59,6 +60,17 @@ public class ServicoController {
 			e.getStackTrace();
 		}
 
+		return mv;
+	}
+
+	@GetMapping("editar/{id}")
+	public ModelAndView editar(@PathVariable Long id) {
+		ModelAndView mv = new ModelAndView("cliente/servico/form-cadastro-servico");
+		CadastrarServicoDTO dto = sService.retornaDtoPorId(id);
+		setCliente(dto.getCliente());
+		mv.addObject("cadastrarServicoDTO", dto);
+		mv.addObject("tiposEnum", PortalEnum.values());
+		mv.addObject("servicoAddCliente", getCliente());
 		return mv;
 	}
 
