@@ -10,6 +10,7 @@
 			</div>
 			<form th:object="${cadastrarServicoDTO}" class="card-body" th:action="@{/servico}" method="POST">
 
+				<input th:field="*{id}" type="hidden" />
 				<div class="form-group">
 					<label for="valor">Valor R$</label>
 					<input th:field="*{valor}" id="valorServico" th:errorClass="is-invalid" class="form-control" />
@@ -25,7 +26,8 @@
 
 				<div class="mb-3">
 					<label for="observacoes" class="form-label">Observerções</label>
-					<textarea class="form-control" th:field="*{observacoes}" rows="3" placeholder="Opional" maxlength="200"></textarea>
+					<textarea class="form-control" th:field="*{observacoes}" rows="3" placeholder="Opional"
+						maxlength="200"></textarea>
 				</div>
 
 				<button class="btn btn-primary mt-3" type="submit">Cadastrar</button>

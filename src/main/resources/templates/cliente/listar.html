@@ -42,6 +42,9 @@
 								<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 									<li><a type="button" class="dropdown-item" th:href="@{'detalhar/' + ${cliente.id}}"
 											th:text="Detalhar"></a></li>
+									<li><button class="dropdown-item btnRemoveCliente" th:text="Excluir"
+											th:value=" ${cliente.id}"></button>
+									</li>
 								</ul>
 							</div>
 						</div>

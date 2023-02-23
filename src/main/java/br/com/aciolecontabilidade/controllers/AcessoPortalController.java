@@ -67,7 +67,7 @@ public class AcessoPortalController {
 	@GetMapping("editar/{id}")
 	public ModelAndView editar(@PathVariable Long id) {
 		ModelAndView mv = new ModelAndView("cliente/acesso-portal/form-cadastro-acesso-portal");
-		AcessoPortalCadastroDTO dto = apService.buscarPorId(id);
+		AcessoPortalCadastroDTO dto = apService.retornaDtorPorId(id);
 		setCliente(dto.getCliente());
 		mv.addObject("acessoPortalCadastroDTO", dto);
 		mv.addObject("tiposEnum", PortalEnum.values());

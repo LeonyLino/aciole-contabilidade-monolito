@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import br.com.aciolecontabilidade.enums.FlagExcluidoEnum;
 import br.com.aciolecontabilidade.enums.FlagFixoEnum;
 import br.com.aciolecontabilidade.enums.TipoClienteEnum;
 import br.com.aciolecontabilidade.exceptions.ClienteEncontradoException;
@@ -39,10 +40,10 @@ public class ClienteServiceImpl implements ClienteService {
 		dto.setNumContatoIR(StringUtil.removerMascara(dto.getNumContatoIR()));
 
 		this.validarDadosExistentes(dto, documento);
-		cRepository.save(new Cliente(null, null, dto.getNomeIR(), documento, dto.getRgIR().isBlank() ? null : dto.getRgIR(),
-				dto.getTituloIR().isBlank() ? null : dto.getTituloIR(), dto.getNumContatoIR(),
-				dto.getEmailIR().isBlank() ? null : dto.getEmailIR(), dto.getDtNascimentoIR(), null,
-				FlagFixoEnum.NAO.getChave(), dto.getTipoCliente(), null));
+		cRepository.save(new Cliente(null, null, dto.getNomeIR(), documento,
+				dto.getRgIR().isBlank() ? null : dto.getRgIR(), dto.getTituloIR().isBlank() ? null : dto.getTituloIR(),
+				dto.getNumContatoIR(), dto.getEmailIR().isBlank() ? null : dto.getEmailIR(), dto.getDtNascimentoIR(),
+				null, FlagFixoEnum.NAO.getChave(), dto.getTipoCliente(), null, FlagExcluidoEnum.NAO));
 
 	}
 
@@ -67,7 +68,8 @@ public class ClienteServiceImpl implements ClienteService {
 	public List<ClienteDTOOut> listar() {
 //		Sort sort = Sort.by("nome");
 //		PageRequest paginacao = PageRequest.of(0, 10, sort);
-		return cRepository.findAll().stream().map(cDTOConverter::convert).collect(Collectors.toList());
+		return cRepository.findAllByFlagExcluidoIs(FlagExcluidoEnum.NAO).stream().map(cDTOConverter::convert)
+				.collect(Collectors.toList());
 
 	}
 
@@ -89,6 +91,13 @@ public class ClienteServiceImpl implements ClienteService {
 						&& result.hasFieldErrors("cnpjIR"))
 				|| (!dto.getTituloIR().isBlank() && result.hasFieldErrors("tituloIR")))
 				|| (result.hasErrors() && result.getErrorCount() > 2);
+	}
+
+	@Override
+	public void removerPorId(Long id) {
+		Cliente cliente = this.buscarPorId(id);
+		cliente.setFlagExcluido(FlagExcluidoEnum.SIM);
+		cRepository.save(cliente);
 	}
 
 }
