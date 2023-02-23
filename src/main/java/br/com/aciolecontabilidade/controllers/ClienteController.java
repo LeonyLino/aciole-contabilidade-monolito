@@ -86,12 +86,24 @@ public class ClienteController {
 		mv.addObject(ITEM_MENU_CLIENTE, cService.buscarPorIdPraDetalhe(Long.valueOf(id)));
 		return mv;
 	}
-	
+
 	@GetMapping("/remover/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public void remover(Principal principal, @PathVariable String id) {
- 		cService.removerPorId(Long.valueOf(id));
- 		this.listar(principal, null);
+		cService.removerPorId(Long.valueOf(id));
+		this.listar(principal, null);
+	}
+
+	@GetMapping("/editar/{id}")
+	public ModelAndView editar(Principal principal, @PathVariable String id) {
+		ModelAndView mv = new ModelAndView("cliente/form-cadastro-cliente");
+		
+		mv.addObject("clienteIRCadastroDTO", cService.buscarPorIdPraEditar(Long.valueOf(id)));
+		mv.addObject("itemMenu", ITEM_MENU_CLIENTE);
+		mv.addObject("tiposClientes", TipoClienteEnum.values());
+		mv.addObject("nomeUser", principal.getName());
+		
+		return mv;
 	}
 
 }

@@ -23,5 +23,7 @@ public interface ClienteService {
 	boolean validarFormClienteIR(BindingResult result, ClienteIRCadastroDTO dto);
 	
 	void removerPorId(Long id);
+	
+	ClienteIRCadastroDTO buscarPorIdPraEditar(Long id);
 
 }

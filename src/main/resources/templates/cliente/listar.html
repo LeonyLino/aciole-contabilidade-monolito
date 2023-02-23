@@ -45,6 +45,9 @@
 									<li><button class="dropdown-item btnRemoveCliente" th:text="Excluir"
 											th:value=" ${cliente.id}"></button>
 									</li>
+									<li><a class="dropdown-item" th:text="Editar"
+											th:href="@{'editar/' + ${cliente.id}}"></a>
+									</li>
 								</ul>
 							</div>
 						</div>

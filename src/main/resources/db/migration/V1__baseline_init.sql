@@ -10,7 +10,7 @@ CREATE TABLE tb_cliente (
 	dt_nascimento_cliente 	DATE NOT NULL,
 	tipo_cliente			VARCHAR(4),
 	fixo_cliente 			CHAR(1) DEFAULT 'N' NOT NULL,
-	fl_excluido_cliente		CHAR(1) DEFAULT 'S' NOT NULL
+	fl_excluido_cliente		CHAR(1) DEFAULT 'N' NOT NULL
 );
 
 CREATE TABLE tb_acesso_portal (
