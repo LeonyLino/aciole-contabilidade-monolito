@@ -10,13 +10,15 @@
 			</div>
 			<form th:object="${clienteIRCadastroDTO}" class="card-body" action="/cliente" method="POST">
 				<div class="form-group">
+					<input th:field="*{id}" type="hidden" />
+					
 					<label for="nomeIR">Nome</label>
 					<input th:field="*{nomeIR}" th:errorClass="is-invalid" class="form-control" maxlength="100"
 						minlength="3" />
 					<div class="invalid-feedback" th:errors="*{nomeIR}">
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" >
 					<label for="tipoIR">Tipo Cliente</label>
 					<select th:field="*{tipoIR}" class="form-select" aria-label=".form-select-sm example"
 						onchange="mudarNomeCampoCpfCnpj()" th:errorClass="is-invalid">

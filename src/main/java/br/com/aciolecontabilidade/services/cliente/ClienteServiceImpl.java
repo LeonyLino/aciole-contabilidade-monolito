@@ -18,6 +18,7 @@ import br.com.aciolecontabilidade.models.dto.ClienteDTOOut;
 import br.com.aciolecontabilidade.models.dto.ClienteIRCadastroDTO;
 import br.com.aciolecontabilidade.models.dto.DetalharClienteIRDTO;
 import br.com.aciolecontabilidade.models.dto.converter.ClienteDTOConverter;
+import br.com.aciolecontabilidade.models.dto.converter.ClienteIRCadastroDTOConveter;
 import br.com.aciolecontabilidade.models.dto.converter.DetalharClienteDTOConverter;
 import br.com.aciolecontabilidade.repository.ClienteRepository;
 import br.com.aciolecontabilidade.utils.StringUtil;
@@ -30,6 +31,7 @@ public class ClienteServiceImpl implements ClienteService {
 	private final ClienteRepository cRepository;
 	private final ClienteDTOConverter cDTOConverter;
 	private final DetalharClienteDTOConverter dcDTOConverter;
+	private final ClienteIRCadastroDTOConveter cIRcadastroDTOConveter;
 
 	@Override
 	@Transactional
@@ -38,9 +40,10 @@ public class ClienteServiceImpl implements ClienteService {
 				.removerMascara(dto.getTipoCliente().equals(TipoClienteEnum.PF) ? dto.getCpfIR() : dto.getCnpjIR());
 
 		dto.setNumContatoIR(StringUtil.removerMascara(dto.getNumContatoIR()));
-
-		this.validarDadosExistentes(dto, documento);
-		cRepository.save(new Cliente(null, null, dto.getNomeIR(), documento,
+		if(dto.getId() == null)
+			this.validarDadosExistentes(dto, documento);
+		
+		cRepository.save(new Cliente(dto.getId(), null, dto.getNomeIR(), documento,
 				dto.getRgIR().isBlank() ? null : dto.getRgIR(), dto.getTituloIR().isBlank() ? null : dto.getTituloIR(),
 				dto.getNumContatoIR(), dto.getEmailIR().isBlank() ? null : dto.getEmailIR(), dto.getDtNascimentoIR(),
 				null, FlagFixoEnum.NAO.getChave(), dto.getTipoCliente(), null, FlagExcluidoEnum.NAO));
@@ -91,6 +94,12 @@ public class ClienteServiceImpl implements ClienteService {
 						&& result.hasFieldErrors("cnpjIR"))
 				|| (!dto.getTituloIR().isBlank() && result.hasFieldErrors("tituloIR")))
 				|| (result.hasErrors() && result.getErrorCount() > 2);
+
+		/*
+		 * 1 - Verifica se cliente é PF ou PJ para definir o campo CPF ou CNPJ como
+		 * obrigatorio 2 - Se o campo de titulo eleitor não for preenchido, não validar
+		 * o campo
+		 */
 	}
 
 	@Override
@@ -98,6 +107,11 @@ public class ClienteServiceImpl implements ClienteService {
 		Cliente cliente = this.buscarPorId(id);
 		cliente.setFlagExcluido(FlagExcluidoEnum.SIM);
 		cRepository.save(cliente);
+	}
+
+	@Override
+	public ClienteIRCadastroDTO buscarPorIdPraEditar(Long id) {
+		return cIRcadastroDTOConveter.convert(this.buscarPorId(id));
 	}
 
 }
