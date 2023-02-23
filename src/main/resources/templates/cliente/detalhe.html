@@ -57,8 +57,9 @@
 			<dd class="col-sm-9 card" th:if="${cliente.servicos != null and !cliente.servicos.empty}">
 				<dl class="row card-body" th:each="servico : ${cliente.servicos}">
 					<dt class="col-sm-4" th:text="'Referente ao Ano ' + ${servico.anoReferencia}"></dt>
-					<a type="button" class="col-1 btn btn-outline-dark" th:href="@{'/servico/editar/' + ${servico.id} }"><i
-							class="bi bi-pen-fill"></i></a>
+					<a type="button" class="col-1 btn btn-outline-dark"
+						th:href="@{'/servico/editar/' + ${servico.id} }"><i class="bi bi-pen-fill"
+							aria-hidden="true"></i></a>
 					<dl class="row">
 						<dd class="col-sm-3" th:text="${#temporals.format(servico.data, 'dd/MM/yyyy')}"></dd>
 						<dd class="col-sm-8" th:text="'R$ ' + ${servico.valor}"></dd>
@@ -73,11 +74,12 @@
 				Portais</dt>
 			<dd class="col-sm-9 card" th:if="${cliente.acessos != null and !cliente.acessos.empty}">
 				<dl class="row card-body" th:each="acesso : ${cliente.acessos}">
-					<dt class="col-sm-2" th:text="${acesso.descricao}"></dt>
+					<dt class="col-sm-3" th:text="${acesso.descricao}"></dt>
 					<a type="button" class="col-1 btn btn-outline-dark"
-						th:href="@{'/acessoPortal/editar/' + ${acesso.id} }"><i class="bi bi-pen-fill"></i></a>
+						th:href="@{'/acessoPortal/editar/' + ${acesso.id} }"><i class="bi bi-pen-fill"
+							aria-hidden="true"></i></a>
 					<button class="col-1 btn btn-outline-dark btnRemoverclass" id="btnConfirmExcluirAcesso"
-						th:value="${acesso.id}"><i class="bi bi-trash3-fill"></i></button>
+						th:value="${acesso.id}"><i class="bi bi-trash3-fill" aria-hidden="true"></i></button>
 					<dl class="row">
 						<dd class="col-sm-3" th:text="'Código: ' + ${acesso.codigoAcesso}"></dd>
 						<dd class="col-sm-3" th:text="'Senha: ' + ${acesso.senha}"></dd>
