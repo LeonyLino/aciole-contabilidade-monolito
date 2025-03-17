@@ -1,15 +1,17 @@
-FROM adoptopenjdk/openjdk11:alpine-jre
-RUN apt-get update
-RUN apt-get install openjdk-11-jdk -y
-COPY . .
+FROM maven:3.8.7-eclipse-temurin-11 AS build
 
-RUN apt-get install maven -y
-RUN mvn clean install
+WORKDIR /app
+COPY pom.xml .
+RUN mvn dependency:go-offline
+
+COPY src ./src
+RUN mvn clean package -DskipTests
 
 FROM openjdk:11.0.16-slim
 
+WORKDIR /app
+COPY --from=build /app/target/Aciole-Contabilidade-0.0.1-SNAPSHOT.jar app.jar
+
 EXPOSE 8080
 
-COPY --from=build target/Aciole-Contabilidade-0.0.1-SNAPSHOT.jar app.jar
-
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
